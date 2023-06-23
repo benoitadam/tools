@@ -1,2 +1,0 @@
-let t=globalThis.localStorage;describe("stored",()=>{let e={};t={getItem:t=>e[t]||null,removeItem:t=>{delete e[t]},setItem:(t,r)=>e[t]=r},test("test1",()=>{(function(e,r){let n=void 0!==r?function(t,e,r){try{return JSON.stringify(t,null,0)}catch(t){return}}(r):void 0;void 0===n?t.removeItem(e):t.setItem(e,n)})("test1","abc"),expect(function(e,r){let n=t.getItem(e);return function(t,e){try{return JSON.parse(t)}catch(t){return e}}(n,void 0)}("test1")).toEqual("abc")})});
-//# sourceMappingURL=stored.spec.js.map

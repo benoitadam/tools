@@ -1,27 +1,27 @@
-export type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
-export type RequestURL = string | URL;
-export type RequestResponse<T = any> = { ok: boolean, data?: T, xhr: XMLHttpRequest };
-export type RequestParams = Record<string, undefined | string | number | (string | number)[]>;
-export type RequestData = any;
-export type RequestResponseType = XMLHttpRequestResponseType; // | 'json' | 'text' | 'html' | 'blob' | 'stream';
-export type RequestOptions<T = any> = {
-  method?: RequestMethod;
+export type ReqMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
+export type ReqURL = string | URL;
+export type ReqResponse<T = any> = { ok: boolean, data?: T, xhr: XMLHttpRequest };
+export type ReqParams = Record<string, undefined | string | number | (string | number)[]>;
+export type ReqData = any;
+export type ReqResponseType = XMLHttpRequestResponseType; // | 'json' | 'text' | 'html' | 'blob' | 'stream';
+export type ReqOptions<T = any> = {
+  method?: ReqMethod;
   headers?: Record<string, string>|(() => Record<string, string>);
   baseUrl?: string;
   timeout?: number;
-  params?: RequestParams;
-  data?: RequestData;
+  params?: ReqParams;
+  data?: ReqData;
   formData?: FormData;
   responseType?: XMLHttpRequestResponseType;
   send?: (xhr: XMLHttpRequest, body: string | FormData | undefined) => void;
   onInit?: (xhr: XMLHttpRequest) => void;
-  onError?: (error: RequestError, xhr: XMLHttpRequest) => void;
+  onError?: (error: ReqError, xhr: XMLHttpRequest) => void;
   onSuccess?: (data: T, xhr: XMLHttpRequest) => void;
   onProgress?: (e: ProgressEvent<XMLHttpRequestEventTarget>, progress: number) => void;
 };
 
 const acceptJson = 'application/json; charset=utf-8';
-const acceptMap: Partial<Record<RequestResponseType, string>> = {
+const acceptMap: Partial<Record<ReqResponseType, string>> = {
   json: acceptJson,
   text: 'text/*; charset=utf-8',
   blob: '*/*',
@@ -29,7 +29,7 @@ const acceptMap: Partial<Record<RequestResponseType, string>> = {
   arraybuffer: '*/*',
 };
 
-export class RequestError extends Error {
+export class ReqError extends Error {
   code: string;
   constructor(public xhr: XMLHttpRequest) {
     const r = xhr.response;
@@ -38,14 +38,14 @@ export class RequestError extends Error {
   }
 }
 
-export class Request {
-  constructor(public baseOptions?: RequestOptions) {}
+export class Req {
+  constructor(public baseOptions?: ReqOptions) {}
 
   newXhr() {
-    return new (require("xmlhttprequest").XMLHttpRequest)();
+    return new XMLHttpRequest();
   }
 
-  async send<T = any>(url: RequestURL, options: RequestOptions<T> = {}): Promise<T> {
+  async send<T = any>(url: ReqURL, options: ReqOptions<T> = {}): Promise<T> {
     const xhr = this.newXhr();
     
     try {
@@ -105,43 +105,43 @@ export class Request {
 
       if (options.onSuccess) options.onSuccess(xhr.response as T, xhr);
 
-      console.debug('Request success', url, options, xhr.response);
+      console.debug('Req success', url, options, xhr.response);
       return xhr.response as T;
     }
     catch (err) {
-      console.debug('Request error', url, options, err);
-      const error = new RequestError(xhr);
+      console.debug('Req error', url, options, err);
+      const error = new ReqError(xhr);
       if (options.onError) options.onError(error, xhr);
       throw error;
     }
   }
 
-  async get<T = any>(url: RequestURL, options: RequestOptions<T> = {}) {
+  async get<T = any>(url: ReqURL, options: ReqOptions<T> = {}) {
     return this.send<T>(url, { method: 'GET', ...options });
   }
 
-  async delete<T = any>(url: RequestURL, options: RequestOptions<T> = {}) {
+  async delete<T = any>(url: ReqURL, options: ReqOptions<T> = {}) {
     return this.send<T>(url, { method: 'DELETE', ...options });
   }
 
-  async post<T = any>(url: RequestURL, data?: RequestData, options: RequestOptions<T> = {}) {
+  async post<T = any>(url: ReqURL, data?: ReqData, options: ReqOptions<T> = {}) {
     return this.send<T>(url, { method: 'POST', data, ...options });
   }
 
-  async patch<T = any>(url: RequestURL, data?: RequestData, options: RequestOptions<T> = {}) {
+  async patch<T = any>(url: ReqURL, data?: ReqData, options: ReqOptions<T> = {}) {
     return this.send<T>(url, { method: 'PATCH', data, ...options });
   }
 
-  async put<T = any>(url: RequestURL, data?: RequestData, options: RequestOptions<T> = {}) {
+  async put<T = any>(url: ReqURL, data?: ReqData, options: ReqOptions<T> = {}) {
     return this.send<T>(url, { method: 'PUT', data, ...options });
   }
 
-  async upload<T = any>(url: RequestURL, name: string, file: File, fileName?: string, options: RequestOptions<T> = {}) {
+  async upload<T = any>(url: ReqURL, name: string, file: File, fileName?: string, options: ReqOptions<T> = {}) {
     const formData = new FormData();
     formData.append(name, file, fileName || file.name);
     return this.send<T>(url, { method: 'POST', formData, ...options });
   }
 }
 
-export const request = new Request();
-export default request;
+export const req = new Req();
+export default req;

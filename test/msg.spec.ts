@@ -1,8 +1,8 @@
-import message, { Message } from '../message';
+import msg, { Msg } from '../msg';
 
 describe('Message', () => {
   test(`Message next and subscribe`, () => {
-    const message = new Message(0);
+    const message = new Msg(0);
     expect(message.get()).toEqual(0);
 
     let a = -1;
@@ -31,7 +31,7 @@ describe('Message', () => {
   });
 
   test(`Message toPromise`, async () => {
-    const message = new Message(0);
+    const message = new Msg(0);
 
     let a = 1;
     message.toPromise((val) => val === 3).then((val) => (a = val));
@@ -49,7 +49,7 @@ describe('Message', () => {
   });
 
   test(`Message map`, async () => {
-    const message = new Message(0);
+    const message = new Msg(0);
     const map = message.map(v => v + 1);
     let v = map.get();
 
@@ -64,7 +64,7 @@ describe('Message', () => {
   });
 
   test(`Message getter setter`, () => {
-    const message = new Message(0);
+    const message = new Msg(0);
     const getVal = message.get.bind(message);
     const setVal = message.set.bind(message);
 
@@ -75,8 +75,8 @@ describe('Message', () => {
     expect(getVal.call(this)).toEqual(2);
   });
 
-  test('message', () => {
-    expect(message(null, 1)).not.toEqual(message(null, 2));
-    expect(message('a', 1)).toEqual(message('a', 2));
+  test('msg', () => {
+    expect(msg(null, 1)).not.toEqual(msg(null, 2));
+    expect(msg('a', 1)).toEqual(msg('a', 2));
   });
 });

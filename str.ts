@@ -1,13 +1,13 @@
 import { str } from "./cast";
 
-export function firstUpper(value: any): string;
-export function firstUpper(value: string): string {
+export function fUpper(value: any): string;
+export function fUpper(value: string): string {
     value = str(value);
     return value ? value[0].toUpperCase() + value.substring(1) : value;
 }
 
-export function firstLower(value: any): string;
-export function firstLower(value: string): string {
+export function fLower(value: any): string;
+export function fLower(value: string): string {
     value = str(value);
     return value ? value[0].toLowerCase() + value.substring(1) : value;
 }
@@ -24,10 +24,10 @@ export function words(value: string): string[] {
 
 export function pascal(value: any): string;
 export function pascal(value: string): string {
-    return words(value).map(firstUpper).join('');
+    return words(value).map(fUpper).join('');
 }
 
 export function camel(value: any): string;
 export function camel(value: string): string {
-    return firstLower(pascal(value));
+    return fLower(pascal(value));
 }

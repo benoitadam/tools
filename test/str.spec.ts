@@ -1,15 +1,15 @@
-import { firstUpper, firstLower, clean, words, pascal, camel } from '../string';
+import { fUpper, fLower, clean, words, pascal, camel } from '../str';
 
 describe('string', () => {
-  test(`firstUpper`, () => {
-    expect(firstUpper('abc')).toEqual('Abc');
-    expect(firstUpper('ABC')).toEqual('ABC');
+  test(`fUpper`, () => {
+    expect(fUpper('abc')).toEqual('Abc');
+    expect(fUpper('ABC')).toEqual('ABC');
   });
 
-  test(`firstLower`, () => {
-    expect(firstLower('abc')).toEqual('abc');
-    expect(firstLower('AbC')).toEqual('abC');
-    expect(firstLower('ABC')).toEqual('aBC');
+  test(`fLower`, () => {
+    expect(fLower('abc')).toEqual('abc');
+    expect(fLower('AbC')).toEqual('abC');
+    expect(fLower('ABC')).toEqual('aBC');
   });
 
   test(`clean`, () => {

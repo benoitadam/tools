@@ -7,3 +7,4 @@ export * from './req';
 export * from './stored';
 export * from './str';
 export * from './uuid';
+export * from './sleep';

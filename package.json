@@ -1,6 +1,6 @@
 {
   "name": "tools",
-  "version": "0.3",
+  "version": "0.4",
   "private": false,
   "description": "Several small practical and light tools.",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/benoitadam/tools.git"

@@ -1,4 +1,4 @@
-import uuid, { isUuid, _uuid } from './uuid';
+import uuid, { isUuid, _uuid } from '../uuid';
 
 describe('uuid', () => {
   const testUuid = (id: string, value: boolean) =>

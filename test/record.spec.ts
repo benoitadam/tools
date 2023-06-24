@@ -1,4 +1,4 @@
-import { byId, byProp, map } from './record';
+import { byId, byProp, map } from '../record';
 
 describe('record', () => {
   test(`byId`, () => {

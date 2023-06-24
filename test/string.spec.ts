@@ -1,4 +1,4 @@
-import { firstUpper, firstLower, clean, words, pascal, camel } from './string';
+import { firstUpper, firstLower, clean, words, pascal, camel } from '../string';
 
 describe('string', () => {
   test(`firstUpper`, () => {

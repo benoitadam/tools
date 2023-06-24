@@ -1,4 +1,4 @@
-import message, { Message } from './message';
+import message, { Message } from '../message';
 
 describe('Message', () => {
   test(`Message next and subscribe`, () => {

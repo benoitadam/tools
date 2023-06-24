@@ -1,6 +1,6 @@
 {
   "name": "tools",
-  "version": "0.2",
+  "version": "0.3",
   "private": false,
   "description": "Several small practical and light tools.",
   "license": "MIT",
@@ -70,15 +70,15 @@
   "targets": {
     "test": {
       "context": "node",
-      "distDir": "test",
+      "distDir": "test/build",
       "engines": {
         "node": "12"
       }
     }
   },
   "scripts": {
-    "pretest": "parcel build \"./src/**/*.spec.ts\" --target test",
-    "test": "jest test --verbose"
+    "pretest": "parcel build \"./test/**/*.spec.ts\" --target test",
+    "test": "jest test/build --verbose"
   },
   "prettier": {
     "printWidth": 120,

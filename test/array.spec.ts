@@ -1,4 +1,4 @@
-import { removeItem, moveItem, last } from './array';
+import { removeItem, moveItem, last } from '../array';
 
 describe('array', () => {
   test(`removeItem`, () => {

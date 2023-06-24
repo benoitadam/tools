@@ -1,4 +1,4 @@
-import { setStorage, getStored, setStored } from './stored';
+import { setStorage, getStored, setStored } from '../stored';
 
 describe('stored', () => {
   const values: any = {};

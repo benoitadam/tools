@@ -1,4 +1,4 @@
-import { str, arr, obj, nbr, bool, err, date } from './cast';
+import { str, arr, obj, nbr, bool, err, date } from '../cast';
 
 describe('cast', () => {
   test(`str`, () => {

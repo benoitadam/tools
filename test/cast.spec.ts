@@ -1,57 +1,57 @@
-import { str, arr, obj, nbr, bool, err, date } from '../cast';
+import { toString, toArray, toObject, toBoolean, toDate, toError, toNumber } from '../src/cast';
 
 describe('cast', () => {
-  test(`str`, () => {
-    expect(str(0)).toEqual('0');
-    expect(str(5)).toEqual('5');
-    expect(str(undefined, 'a')).toBe('a');
+  test(`toString`, () => {
+    expect(toString(0)).toEqual('0');
+    expect(toString(5)).toEqual('5');
+    expect(toString(undefined, 'a')).toBe('a');
   });
 
-  test(`arr`, () => {
-    expect(arr(0)).toEqual([0]);
-    expect(arr([5])).toEqual([5]);
-    expect(arr({ a: 1 })).toEqual([{ a: 1 }]);
+  test(`toArray`, () => {
+    expect(toArray(0)).toEqual([0]);
+    expect(toArray([5])).toEqual([5]);
+    expect(toArray({ a: 1 })).toEqual([{ a: 1 }]);
   });
 
-  test(`obj`, () => {
-    expect(obj(0)).toEqual({});
-    expect(obj([5], 'b')).toEqual('b');
-    expect(obj({ a: 1 })).toEqual({ a: 1 });
+  test(`toObject`, () => {
+    expect(toObject(0)).toEqual({});
+    expect(toObject([5], 'b')).toEqual('b');
+    expect(toObject({ a: 1 })).toEqual({ a: 1 });
   });
 
-  test(`nbr`, () => {
-    expect(nbr(0, 'a')).toEqual(0);
-    expect(nbr('', 'b')).toEqual('b');
-    expect(nbr(undefined, 'c')).toEqual('c');
-    expect(nbr('')).toEqual(undefined);
-    expect(nbr(' ')).toEqual(undefined);
-    expect(nbr(-5)).toEqual(-5);
-    expect(nbr('-5')).toEqual(-5);
-    expect(nbr('-7.3')).toEqual(-7.3);
-    expect(nbr('-2,4')).toEqual(-2.4);
-    expect(nbr('a2')).toEqual(2);
-    expect(nbr('2a')).toEqual(2);
+  test(`toBoolean`, () => {
+    expect(toBoolean(0)).toEqual(false);
+    expect(toBoolean(1)).toEqual(true);
+    expect(toBoolean('true')).toEqual(true);
+    expect(toBoolean('false')).toEqual(false);
+    expect(toBoolean(undefined, 'b')).toEqual('b');
   });
 
-  test(`bool`, () => {
-    expect(bool(0)).toEqual(false);
-    expect(bool(1)).toEqual(true);
-    expect(bool('true')).toEqual(true);
-    expect(bool('false')).toEqual(false);
-    expect(bool(undefined, 'b')).toEqual('b');
-  });
-
-  test(`err`, () => {
-    expect(err(new Error("test")).message).toEqual("test");
-    expect(err("test").message).toEqual("test");
-  });
-
-  test(`date`, () => {
+  test(`toDate`, () => {
     const d0 = new Date(0);
     const now = new Date();
     const nowTime = now.getTime();
-    expect(date(now, d0).getTime()).toEqual(nowTime);
-    expect(date(nowTime, d0).getTime()).toEqual(nowTime);
+    expect(toDate(now, d0).getTime()).toEqual(nowTime);
+    expect(toDate(nowTime, d0).getTime()).toEqual(nowTime);
+  });
+  
+  test(`toError`, () => {
+    expect(toError(new Error("test")).message).toEqual("test");
+    expect(toError("test").message).toEqual("test");
+  });
+
+  test(`toNumber`, () => {
+    expect(toNumber(0, 'a')).toEqual(0);
+    expect(toNumber('', 'b')).toEqual('b');
+    expect(toNumber(undefined, 'c')).toEqual('c');
+    expect(toNumber('')).toEqual(undefined);
+    expect(toNumber(' ')).toEqual(undefined);
+    expect(toNumber(-5)).toEqual(-5);
+    expect(toNumber('-5')).toEqual(-5);
+    expect(toNumber('-7.3')).toEqual(-7.3);
+    expect(toNumber('-2,4')).toEqual(-2.4);
+    expect(toNumber('a2')).toEqual(2);
+    expect(toNumber('2a')).toEqual(2);
   });
 });
 

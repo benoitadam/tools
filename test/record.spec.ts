@@ -1,4 +1,4 @@
-import { byId, byProp, map } from '../record';
+import { byId, byProp } from '../src/record';
 
 describe('record', () => {
   test(`byId`, () => {
@@ -13,12 +13,5 @@ describe('record', () => {
     const b = { id: 'kb', p: 'pb' };
     const c = { id: 'kc', p: 'pc' };
     expect(byProp([a, b, c], i => i.p)).toEqual({ pa: a, pb: b, pc: c });
-  });
-
-  test(`map`, () => {
-    const a = { id: 'ka', p: 'pa' };
-    const b = { id: 'kb', p: 'pb' };
-    const c = { id: 'kc', p: 'pc' };
-    expect(map({ a, b, c }, i => i.p)).toEqual({ a: 'pa', b: 'pb', c: 'pc' });
   });
 });

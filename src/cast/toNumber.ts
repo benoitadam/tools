@@ -5,3 +5,5 @@ export function toNumber<D>(v: any, nanVal?: D): number | D | undefined {
     const nbr = clean !== '' ? Number(clean) : Number.NaN;
     return Number.isNaN(nbr) ? nanVal : nbr;
 }
+
+export const nbr = toNumber;

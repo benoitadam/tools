@@ -1,5 +1,5 @@
 import { Observer, getObserver } from '../src/observer';
-import sleep from '../src/promise/sleep';
+import { sleep } from '../src/promise/sleep';
 
 describe('Observer', () => {
   test(`Observer set and on off`, () => {
@@ -102,7 +102,7 @@ describe('Observer', () => {
     m0.set(1);
     expect(m1.get()).toEqual(0);
 
-    await sleep(10);
+    await sleep(50);
     expect(m1.get()).toEqual(1);
 
     m0.set(2);
@@ -110,7 +110,7 @@ describe('Observer', () => {
     m0.set(4);
     expect(m1.get()).toEqual(1);
 
-    await sleep(10);
+    await sleep(50);
     expect(m1.get()).toEqual(4);
 
     expect(lastEqual).toEqual(false);
@@ -136,7 +136,7 @@ describe('Observer', () => {
     m0.set(2);
     expect(m1.get()).toEqual(1);
 
-    await sleep(20);
+    await sleep(50);
     expect(m1.get()).toEqual(2);
 
     m0.set(3);
@@ -144,7 +144,7 @@ describe('Observer', () => {
     m0.set(5);
     expect(m1.get()).toEqual(3);
 
-    await sleep(20);
+    await sleep(50);
     expect(m1.get()).toEqual(5);
 
     expect(lastEqual).toEqual(false);

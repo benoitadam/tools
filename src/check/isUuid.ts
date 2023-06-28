@@ -1,5 +1,4 @@
-const regExp = /^[0-9a-f]{8}\-[0-9a-f]{4}\-[0-9a-f]{4}\-[0-9a-f]{4}\-[0-9a-f]{12}$/;
-
 export function isUuid(str: string) {
-    return regExp.test(String(str).toLowerCase());
+    const code = str.replace(/[a-zA-Z0-9]+/g, a => ''+a.length);
+    return code === '8-4-4-4-12' || code === '32';
 }

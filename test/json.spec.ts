@@ -1,6 +1,15 @@
-import { parseJson, getJson } from '../src/json';
+import { parseJson, getJson, cloneJson } from '../src/json';
 
 describe('json', () => {
+  test(`cloneJson`, () => {
+    const a = { n: 1 };
+    expect(cloneJson("abcd")).toEqual("abcd");
+    expect(cloneJson(a, { n: 2 }).n).toEqual(a.n);
+    const b = cloneJson(a);
+    b.n = 2;
+    expect(b).not.toEqual(a);
+  });
+  
   test(`parseJson`, () => {
     expect(parseJson('"abcd"')).toEqual('abcd');
     expect(parseJson('{"a":1}')).toEqual({ a: 1 });

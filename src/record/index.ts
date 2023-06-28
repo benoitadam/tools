@@ -1,5 +1,4 @@
-export * from './byId';
-export * from './byProp';
+export * from './cloneRecord';
 export * from './deleteKey';
 export * from './groupBy';
-export * from './recordMap';
+export * from './valueBy';

@@ -1,6 +1,7 @@
 export * from './array';
 export * from './cast';
 export * from './check';
+export * from './clipboard';
 export * from './json';
 export * from './number';
 export * from './observer';
@@ -9,6 +10,5 @@ export * from './record';
 export * from './rest';
 export * from './stored';
 export * from './string';
-export * from './clone';
-export * from './cloneFlat';
-export * from './deepDiff';
+export * from './json/cloneJson';
+export * from './record/cloneRecord';

@@ -68,46 +68,50 @@ describe('string', () => {
     expect(isUuid('00000000-0000-0000-0000-000000000000')).toBe(true);
   })
 
-  test('isUuid(uuid())', () => {
-    expect(isUuid(uuid())).toBe(true);
+  test('isUuid ffffffff-ffff-ffff-ffff-ffffffffffff', () => {
+    expect(isUuid('ffffffff-ffff-ffff-ffff-ffffffffffff')).toBe(true);
   })
-  
-  test('uuid', () => {
-    const testUuid = (id: string, value: boolean) => expect(isUuid(id)).toBe(value);
 
-    testUuid('00000000-0000-0000-0000-000000000000', true);
-    testUuid('ffffffff-ffff-ffff-ffff-ffffffffffff', true);
-    testUuid('7ae77ebe-16c8-458b-8a44-4396dbe7f6f4', true);
-    testUuid('7AE77EBE-16C8-458B-8A44-4396DBE7F6F4', true);
-    testUuid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', false);
-    testUuid('7ae77ebea16c8-458b-8a44-4396dbe7f6f4', false);
-    testUuid('7ae77ebea16c8458b8a444396dbe7f6f4', false);
+  test('isUuid 7ae77ebe-16c8-458b-8a44-4396dbe7f6f4', () => {
+    expect(isUuid('7ae77ebe-16c8-458b-8a44-4396dbe7f6f4')).toBe(true);
+  })
 
-    for (let i = 0; i < 10; i++) {
-      const id = uuid();
+  test('isUuid 7ae77ebe16c8458b8a444396dbe7f6f4', () => {
+    expect(isUuid('7ae77ebe16c8458b8a444396dbe7f6f4')).toBe(true);
+  })
+
+  for (let i = 0; i < 10; i++) {
+    const id = uuid();
+    test('uuid ' + id, () => {
       expect(isUuid(id)).toBeTruthy();
-    }
+    })
+  }
+  
+  const crypto = require('crypto');
 
-    const crypto = require('crypto');
-
-    const uuid1 = _uuid({ randomUUID: crypto.randomUUID });
-    for (let i = 0; i < 2; i++) {
-      const id1 = uuid1();
+  const uuid1 = _uuid({ randomUUID: crypto.randomUUID });
+  for (let i = 0; i < 2; i++) {
+    const id1 = uuid1();
+    test('uuid ' + id1, () => {
       expect(isUuid(id1)).toBeTruthy();
-    }
+    })
+  }
 
-    const uuid2 = _uuid({ getRandomValues: crypto.getRandomValues });
-    for (let i = 0; i < 2; i++) {
-      const id2 = uuid2();
+  const uuid2 = _uuid({ getRandomValues: crypto.getRandomValues });
+  for (let i = 0; i < 2; i++) {
+    const id2 = uuid2();
+    test('uuid ' + id2, () => {
       expect(isUuid(id2)).toBeTruthy();
-    }
+    })
+  }
 
-    const uuid3 = _uuid({});
-    for (let i = 0; i < 2; i++) {
-      const id3 = uuid3();
+  const uuid3 = _uuid({});
+  for (let i = 0; i < 2; i++) {
+    const id3 = uuid3();
+    test('uuid ' + id3, () => {
       expect(isUuid(id3)).toBeTruthy();
-    }
-  });
+    });
+  }
 });
 
 

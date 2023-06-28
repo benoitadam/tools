@@ -1,4 +1,4 @@
-import { toString, toArray, toObject, toBoolean, toDate, toError, toNumber } from '../src/cast';
+import { toString, toArray, toRecord, toBoolean, toDate, toError, toNumber } from '../src/cast';
 
 describe('cast', () => {
   test(`toString`, () => {
@@ -13,10 +13,10 @@ describe('cast', () => {
     expect(toArray({ a: 1 })).toEqual([{ a: 1 }]);
   });
 
-  test(`toObject`, () => {
-    expect(toObject(0)).toEqual({});
-    expect(toObject([5], 'b')).toEqual('b');
-    expect(toObject({ a: 1 })).toEqual({ a: 1 });
+  test(`toRecord`, () => {
+    expect(toRecord(0)).toEqual({});
+    expect(toRecord([5], 'b')).toEqual('b');
+    expect(toRecord({ a: 1 })).toEqual({ a: 1 });
   });
 
   test(`toBoolean`, () => {

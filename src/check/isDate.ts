@@ -1,3 +1,3 @@
-export function isDate(arg: any): arg is Date {
-    return arg instanceof Date;
+export function isDate(value: any): value is Date {
+    return value instanceof Date;
 }

@@ -1,3 +1,3 @@
-export function isArray(arg: any): arg is any[] {
-    return Array.isArray(arg);
+export function isArray(value: any): value is any[] {
+    return Array.isArray(value);
 }

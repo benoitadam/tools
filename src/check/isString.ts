@@ -1,3 +1,3 @@
-export function isString(arg: any): boolean {
-    return typeof arg === "string";
+export function isString(value: any): value is string {
+    return typeof value === "string";
 }

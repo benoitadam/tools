@@ -10,5 +10,3 @@ export * from './record';
 export * from './rest';
 export * from './stored';
 export * from './string';
-export * from './json/cloneJson';
-export * from './record/cloneRecord';

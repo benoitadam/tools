@@ -1,5 +1,5 @@
-import { xhrRest } from "./xhrRest";
-import { RestData, RestOptions, RestURL } from "./types";
+import { xhrRest } from './xhrRest';
+import { RestData, RestOptions, RestURL } from './types';
 
 export class Rest {
   constructor(public baseOptions?: RestOptions) {}

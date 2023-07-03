@@ -1,10 +1,10 @@
-import { getJson } from "../json/getJson";
-import { setStored } from "../stored";
+import { getJson } from '../json/getJson';
+import { setStored } from '../stored';
 
 export function copy(value: any): Promise<void> {
-    setStored('__clipboard', value);
-    if (navigator && navigator.clipboard) {
-        return navigator.clipboard.writeText(getJson(value, ''));
-    }
-    return Promise.resolve();
+  setStored('__clipboard', value);
+  if (navigator && navigator.clipboard) {
+    return navigator.clipboard.writeText(getJson(value, ''));
+  }
+  return Promise.resolve();
 }

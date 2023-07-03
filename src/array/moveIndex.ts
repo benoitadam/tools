@@ -7,8 +7,8 @@
  * @returns {T[]} A new array with the item moved.
  */
 export function moveIndex<T>(items: T[], from: number, to: number) {
-    if (from === to) return items;
-    const removes = items.splice(from, 1);
-    items.splice(to, 0, removes[0]);
-    return items;
+  if (from === to) return items;
+  const removes = items.splice(from, 1);
+  items.splice(to, 0, removes[0]);
+  return items;
 }

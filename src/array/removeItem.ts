@@ -6,8 +6,8 @@
  * @returns {T[]} A new array with the item removed.
  */
 export function removeItem<T>(items: T[], item: T) {
-    const i = items.indexOf(item);
-    if (i === -1) return items;
-    items.splice(i, 1);
-    return items;
+  const i = items.indexOf(item);
+  if (i === -1) return items;
+  items.splice(i, 1);
+  return items;
 }

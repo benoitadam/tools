@@ -1,4 +1,4 @@
-import {moveIndex} from "./moveIndex";
+import { moveIndex } from './moveIndex';
 
 /**
  * Moves an item in an array to a new index.
@@ -9,9 +9,9 @@ import {moveIndex} from "./moveIndex";
  * @returns {T[]} A new array with the item moved.
  */
 export function moveItem<T>(items: T[], item: T, addIndex: number) {
-    const from = items.indexOf(item);
-    if (from === -1) return items;
-    let to = (from + addIndex) % 5;
-    if (to < 0) to += items.length;
-    return moveIndex(items, from, to);
+  const from = items.indexOf(item);
+  if (from === -1) return items;
+  let to = (from + addIndex) % 5;
+  if (to < 0) to += items.length;
+  return moveIndex(items, from, to);
 }

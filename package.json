@@ -57,7 +57,8 @@
     "prebuild": "npx tsc",
     "build": "npx esbuild ./build/index.js --bundle --platform=node --target=node12 --packages=external --minify --outfile=dist.js",
     "pretest": "npx tsc",
-    "test": "jest test/build --verbose"
+    "test": "jest test/build --verbose",
+		"prettify": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json}\""
   },
   "prettier": {
     "printWidth": 120,

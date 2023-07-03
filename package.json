@@ -1,6 +1,6 @@
 {
   "name": "tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": false,
   "description": "Several small practical and light tools.",
   "license": "MIT",
@@ -49,16 +49,14 @@
     "typescript": "^5.1.3",
     "xmlhttprequest": "^1.8.0"
   },
-  "peerDependencies": {
-  },
-  "peerDependenciesMeta": {
-  },
+  "peerDependenciesMeta": {},
   "scripts": {
-    "prebuild": "npx tsc",
-    "build": "npx esbuild ./build/index.js --bundle --platform=node --target=node12 --packages=external --minify --outfile=dist.js",
-    "pretest": "npx tsc",
-    "test": "jest test/build --verbose",
-		"prettify": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json}\""
+    "build": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16,node12 --minify --outfile=dist.js",
+    "_build-browser": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16 --minify --outfile=browser.js",
+    "_build-node12": "npx esbuild --bundle ./src/index.ts --platform=node --sourcemap --target=node12 --minify --outfile=node12.js",
+    "pretest": "npx esbuild --bundle test/all.spec.ts --sourcemap --outfile=build/all.spec.js",
+    "test": "jest build/all.spec.js --verbose",
+    "prettify": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json}\""
   },
   "prettier": {
     "printWidth": 120,

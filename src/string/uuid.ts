@@ -27,4 +27,4 @@ export const _uuid = (crypto: any) => {
   };
 };
 
-export default _uuid(require('crypto') || {});
+export default _uuid(global.crypto || {});

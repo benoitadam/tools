@@ -71,3 +71,5 @@ Several small practical and light tools.
 ### clone
 ### cloneFlat
 ### deepDiff
+
+TODO crypto on nodejs for uuid

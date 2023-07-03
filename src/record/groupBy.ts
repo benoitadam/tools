@@ -27,9 +27,10 @@ export default ((items: any, key: any, val?: any): Record<string, any[]> => {
     });
   }
   if (isRecord(items)) {
-    Object.entries(items).forEach(([key, item]) => {
-      const k = getK(item, key);
-      (r[k] || (r[k] = [])).push(getV(item, key));
+    Object.entries(items).forEach(kv => {
+      const key = kv[0], val = kv[1];
+      const k = getK(val, key);
+      (r[k] || (r[k] = [])).push(getV(val, key));
     });
   }
   return r;

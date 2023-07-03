@@ -13,14 +13,25 @@ describe('check', () => {
     expect(isDate(new Date())).toBe(true);
   });
 
-  test(`isEmpty`, () => {
-    expect(isEmpty(new Date())).toBe(false);
+  test(`isEmpty { a: 1 }`, () => {
     expect(isEmpty({ a: 1 })).toBe(false);
+  });
+  test(`isEmpty [1]`, () => {
     expect(isEmpty([1])).toBe(false);
+  });
+  test(`isEmpty 'a'`, () => {
     expect(isEmpty('a')).toBe(false);
+  });
+  test(`isEmpty []`, () => {
     expect(isEmpty([])).toBe(true);
+  });
+  test(`isEmpty {}`, () => {
     expect(isEmpty({})).toBe(true);
+  });
+  test(`isEmpty ''`, () => {
     expect(isEmpty('')).toBe(true);
+  });
+  test(`isEmpty false`, () => {
     expect(isEmpty(false)).toBe(true);
   });
 

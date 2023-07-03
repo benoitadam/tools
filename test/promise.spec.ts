@@ -13,14 +13,17 @@ describe('promise', () => {
   
   test(`retry`, async () => {
     let i=0;
-    const v = await retry(async () => { throw i++; }, 5).catch(() => 0);
+    const v = await retry(async () => {
+      i++;
+      throw i;
+    }, 5).catch((e) => e);
     expect(v).toEqual(5);
   });
 
   test(`withTimeout`, async () => {
-    const test1 = withTimeout(sleep(50).then(() => true), 100).catch(() => false);
-    expect(test1).toEqual(true);
-    const test2 = withTimeout(sleep(100).then(() => true), 50).catch(() => false);
-    expect(test2).toEqual(false);
+    const test1 = await withTimeout(sleep(50).then(() => true), 100).catch(() => false);
+    expect(test1).toBe(true);
+    const test2 = await withTimeout(sleep(100).then(() => true), 50).catch(() => false);
+    expect(test2).toBe(false);
   });
 });

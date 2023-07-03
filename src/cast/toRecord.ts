@@ -3,3 +3,5 @@ export function toRecord<T = any, U = any>(v: T | null | undefined, def: U): T |
 export function toRecord<T = any>(v: any, def: T = {} as any): T {
   return v === null || typeof v !== 'object' || Array.isArray(v) ? def : v;
 }
+
+export const rec = <T = any>(v: T | null | undefined) => toRecord(v);

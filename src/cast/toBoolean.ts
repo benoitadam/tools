@@ -7,3 +7,5 @@ export function toBoolean<T = boolean>(v: any, defVal?: T | boolean): boolean | 
   if (isString(v)) return ['true', 'ok', 'on', '1'].indexOf(String(v).toLowerCase()) !== -1;
   return isNil(v) ? defVal : !!v;
 }
+
+export const bool = (v: any) => toBoolean(v);

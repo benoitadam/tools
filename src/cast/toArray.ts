@@ -6,3 +6,5 @@ export function toArray<T = any>(v: any, def: T[]): T[];
 export function toArray<T = any>(v: any, def: T[] = []): T[] {
   return isNil(v) ? def : isArray(v) ? v : [v];
 }
+
+export const arr = <T = any>(v: T[] | T | null | undefined) => toArray(v);

@@ -6,4 +6,4 @@ export function toNumber<D>(v: any, nanVal?: D): number | D | undefined {
   return Number.isNaN(nbr) ? nanVal : nbr;
 }
 
-export const nbr = toNumber;
+export const nbr = (v: any) => toNumber(v, 0);

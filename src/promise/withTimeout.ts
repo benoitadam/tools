@@ -5,9 +5,9 @@ export class TimeoutError extends Error {
     }
 }
 
-export function withTimeout<T>(promise: Promise<T>, timeout = 5000): Promise<T> {
-	return Promise.race([
-		promise,
-		new Promise<T>((_, reject) => setTimeout(() => reject(new TimeoutError()), timeout)),
-	]);
+export function withTimeout<T>(promise: Promise<T>, timeoutMs = 5000): Promise<T> {
+    return new Promise((resolve, reject) => {
+		const t = setTimeout(() => reject(new TimeoutError()), timeoutMs);
+		promise.then(resolve).catch(reject).finally(() => clearTimeout(t));
+	});
 }

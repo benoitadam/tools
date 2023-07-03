@@ -1,7 +1,7 @@
-export * from './camel';
-export * from './clean';
-export * from './firstLower';
-export * from './firstUpper';
-export * from './pascal';
-export * from './uuid';
-export * from './words';
+export { default as camel } from './camel';
+export { default as clean } from './clean';
+export { default as firstLower } from './firstLower';
+export { default as firstUpper } from './firstUpper';
+export { default as pascal } from './pascal';
+export { default as uuid } from './uuid';
+export { default as words } from './words';

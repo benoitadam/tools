@@ -1,5 +1,5 @@
 import { Observer, getObserver } from '../src/observer';
-import { sleep } from '../src/promise/sleep';
+import sleep from '../src/promise/sleep';
 
 describe('Observer', () => {
   test(`Observer set and on off`, () => {

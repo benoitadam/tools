@@ -1,9 +1,12 @@
-export function toNumber(v: any): number | undefined;
-export function toNumber<D>(v: any, nanVal: D): number | D;
-export function toNumber<D>(v: any, nanVal?: D): number | D | undefined {
-  const clean = typeof v === 'string' ? v.replace(/,/g, '.').replace(/[^0-9\-\.]/g, '') : String(v);
-  const nbr = clean !== '' ? Number(clean) : Number.NaN;
-  return Number.isNaN(nbr) ? nanVal : nbr;
+import isString from "../check/isString";
+
+interface ToNumber {
+  (v: any): number | undefined;
+  <D>(v: any, nanVal: D): number | D;
 }
 
-export const nbr = (v: any) => toNumber(v, 0);
+export default (<D>(v: any, nanVal?: D): number | D | undefined => {
+  const clean = isString(v) ? v.replace(/,/g, '.').replace(/[^0-9\-\.]/g, '') : String(v);
+  const nbr = clean !== '' ? Number(clean) : Number.NaN;
+  return Number.isNaN(nbr) ? nanVal : nbr;
+}) as ToNumber;

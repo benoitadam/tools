@@ -1,11 +1,11 @@
-import { xhrRest } from './xhrRest';
+import xhrRest from './xhrRest';
 import { RestData, RestOptions, RestURL } from './types';
 
-export class Rest {
-  constructor(public baseOptions?: RestOptions) {}
+export default class Rest {
+  constructor(public options?: RestOptions) {}
 
-  new(baseOptions?: RestOptions) {
-    return new Rest(baseOptions);
+  new(options?: RestOptions) {
+    return new Rest(options);
   }
 
   newXhr() {
@@ -14,10 +14,7 @@ export class Rest {
 
   send<T = any>(url: RestURL, options: RestOptions<T> = {}) {
     const xhr = this.newXhr();
-    if (this.baseOptions) {
-      options = { ...this.baseOptions, ...options };
-    }
-    return xhrRest<T>(xhr, url, options);
+    return xhrRest<T>(xhr, url, this.options ? { ...this.options, ...options } : options);
   }
 
   get<T = any>(url: RestURL, options: RestOptions<T> = {}) {

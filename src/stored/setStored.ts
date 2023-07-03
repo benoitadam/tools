@@ -1,8 +1,9 @@
-import { getJson } from '../json/getJson';
-import { storage } from './storage';
+import isUndefined from '../check/isUndefined';
+import getJson from '../json/getJson';
+import storage from './storage';
 
-export function setStored<T = any>(key: string, value: T) {
-  const json = value !== undefined ? getJson(value) : undefined;
-  if (json === undefined) storage().removeItem(key);
+export default <T = any>(key: string, value: T) => {
+  const json = isUndefined(value) ? undefined : getJson(value);
+  if (isUndefined(json)) storage().removeItem(key);
   else storage().setItem(key, json);
 }

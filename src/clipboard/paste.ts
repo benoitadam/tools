@@ -1,7 +1,7 @@
-import { parseJson } from '../json/parseJson';
-import { getStored } from '../stored/getStored';
+import parseJson from '../json/parseJson';
+import getStored from '../stored/getStored';
 
-export function paste() {
+export default () => {
   if (navigator && navigator.clipboard) {
     return navigator.clipboard
       .readText()

@@ -1,0 +1,1 @@
+export type RecordWritable<T> = { -readonly [P in keyof T]: T[P] };

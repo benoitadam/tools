@@ -1,2 +1,2 @@
-export * from './copy';
-export * from './paste';
+export { default as copy } from './copy';
+export { default as paste } from './paste';

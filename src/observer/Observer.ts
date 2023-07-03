@@ -1,12 +1,12 @@
-import { getStored } from '../stored/getStored';
-import { setStored } from '../stored/setStored';
+import getStored from '../stored/getStored';
+import setStored from '../stored/setStored';
 
 export type ObserverHandler<T> = (value: T, oldValue: T) => void;
 
 export type ObserverFilter<T> = (value: T) => boolean;
 const nullObserverFilter: ObserverFilter<any> = (v: any) => v !== null && v !== undefined;
 
-export class Observer<T = any> {
+export default class Observer<T = any> {
   /** Value */
   val: T;
   key?: string;

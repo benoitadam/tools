@@ -1,8 +1,9 @@
-import { Rest } from './Rest';
+import Rest from './Rest';
 
-export * from './Rest';
-export * from './RestError';
 export * from './types';
-export * from './xhrRest';
+
+export { default as Rest } from './Rest';
+export { default as RestError } from './RestError';
+export { default as xhrRest } from './xhrRest';
 
 export const rest = new Rest();

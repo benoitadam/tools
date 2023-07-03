@@ -1,3 +1,4 @@
-export function isNil(value: any): boolean {
-  return value === null || value === undefined;
-}
+import isNull from "./isNull";
+import isUndefined from "./isUndefined";
+
+export default (value: any): boolean => isNull(value) || isUndefined(value);

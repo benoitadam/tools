@@ -1,4 +1,4 @@
-import { RestError } from './RestError';
+import RestError from './RestError';
 import { RestOptions, RestResponseType, RestURL } from './types';
 
 const acceptJson = 'application/json; charset=utf-8';
@@ -10,7 +10,7 @@ const acceptMap: Partial<Record<RestResponseType, string>> = {
   arraybuffer: '*/*',
 };
 
-export async function xhrRest<T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestOptions<T> = {}): Promise<T> {
+export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestOptions<T> = {}): Promise<T> => {
   try {
     if (options.onInit) options.onInit(xhr);
 

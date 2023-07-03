@@ -1,4 +1,4 @@
-import { RestError } from './RestError';
+import type RestError from './RestError';
 
 export type RestMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
 export type RestURL = string | URL;

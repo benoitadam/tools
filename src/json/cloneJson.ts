@@ -1,8 +1,9 @@
-import { parseJson } from './parseJson';
-import { getJson } from './getJson';
+import parseJson from './parseJson';
+import getJson from './getJson';
 
-export function cloneJson<T = any>(v: T): T;
-export function cloneJson<T = any>(v: T, defVal: T): T;
-export function cloneJson<T = any>(v: T, defVal?: T): T | undefined {
-  return parseJson(getJson(v), defVal);
+interface CloneJson {
+  <T = any>(v: T): T;
+  <T = any>(v: T, defVal: T): T;
 }
+
+export default (<T>(v: T, defVal?: T): T | undefined => parseJson(getJson(v), defVal)) as CloneJson;

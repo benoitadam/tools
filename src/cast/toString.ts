@@ -1,7 +1,3 @@
-import { isNil } from '../check/isNil';
+import isNil from '../check/isNil';
 
-export function toString(v: any, def: string = ''): string {
-  return isNil(v) ? def : String(v);
-}
-
-export const str = (v: any) => toString(v);
+export default (v: any, def: string = ''): string => isNil(v) ? def : String(v);

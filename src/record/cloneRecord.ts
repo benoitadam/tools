@@ -1,5 +1,3 @@
-export type Writable<T> = { -readonly [P in keyof T]: T[P] };
+import { RecordWritable } from "./RecordWritable";
 
-export function cloneRecord<T extends {}>(value: T | null | undefined): Writable<T> {
-  return Object.assign({}, value);
-}
+export default <T extends {}>(value: T | null | undefined): RecordWritable<T> => Object.assign({}, value);

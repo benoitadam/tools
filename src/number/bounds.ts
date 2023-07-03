@@ -1,5 +1,7 @@
-export function bounds(val: number, min?: number, max?: number): number {
-  if (min !== undefined && val < min) val = min;
-  if (max !== undefined && val > max) val = max;
-  return val;
-}
+import isNumber from "../check/isNumber";
+
+export default (val: number, min?: number, max?: number): number => (
+  (isNumber(min) && val < min) ? min :
+  (isNumber(max) && val > max) ? max :
+  val
+)

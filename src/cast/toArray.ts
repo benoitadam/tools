@@ -1,10 +1,9 @@
-import { isArray } from '../check/isArray';
-import { isNil } from '../check/isNil';
+import isArray from '../check/isArray';
+import isNil from '../check/isNil';
 
-export function toArray<T = any>(v: T[] | T | null | undefined): T[];
-export function toArray<T = any>(v: any, def: T[]): T[];
-export function toArray<T = any>(v: any, def: T[] = []): T[] {
-  return isNil(v) ? def : isArray(v) ? v : [v];
+interface ToArray {
+  <T = any>(v: T[] | T | null | undefined): T[];
+  <T = any>(v: any, def: T[]): T[];
 }
 
-export const arr = <T = any>(v: T[] | T | null | undefined) => toArray(v);
+export default (<T = any>(v: any, def: T[] = []): T[] => isNil(v) ? def : isArray(v) ? v : [v]) as ToArray

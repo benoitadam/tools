@@ -1,7 +1,7 @@
-import { isRecord } from '../check/isRecord';
-import { isArray } from '../check/isArray';
-import { isFunction } from '../check/isFunction';
-import { isNil } from '../check/isNil';
+import isRecord from '../check/isRecord';
+import isArray from '../check/isArray';
+import isFunction from '../check/isFunction';
+import isNil from '../check/isNil';
 
 type IKey<T> = undefined | null | keyof T | ((item: T, index: number) => any);
 type IVal<T, U> = undefined | null | keyof T | ((item: T, index: number) => U);
@@ -9,11 +9,14 @@ type IVal<T, U> = undefined | null | keyof T | ((item: T, index: number) => U);
 type RKey<T> = undefined | null | keyof T | ((item: T, key: string) => any);
 type RVal<T, U> = undefined | null | keyof T | ((item: T, key: string) => U);
 
-export function groupBy<T>(items: T[], key: IKey<T>): Record<string, T[]>;
-export function groupBy<T, U>(items: T[], key: IKey<T>, val: IVal<T, U>): Record<string, U[]>;
-export function groupBy<T>(record: Record<string, T>, key: RKey<T>): Record<string, T[]>;
-export function groupBy<T, U>(record: Record<string, T>, key: RKey<T>, val: RVal<T, U>): Record<string, U[]>;
-export function groupBy(items: any, key: any, val?: any): Record<string, any[]> {
+interface GroupBy {
+  <T>(items: T[], key: IKey<T>): Record<string, T[]>;
+  <T, U>(items: T[], key: IKey<T>, val: IVal<T, U>): Record<string, U[]>;
+  <T>(record: Record<string, T>, key: RKey<T>): Record<string, T[]>;
+  <T, U>(record: Record<string, T>, key: RKey<T>, val: RVal<T, U>): Record<string, U[]>
+}
+
+export default ((items: any, key: any, val?: any): Record<string, any[]> => {
   const r: Record<string, any[]> = {};
   const getK = isFunction(key) ? key : isNil(key) ? (_: any, k: any) => k : (i: any) => i[key];
   const getV = isFunction(val) ? val : isNil(val) ? (i: any) => i : (i: any) => i[val];
@@ -30,4 +33,4 @@ export function groupBy(items: any, key: any, val?: any): Record<string, any[]> 
     });
   }
   return r;
-}
+}) as GroupBy;

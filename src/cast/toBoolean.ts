@@ -1,11 +1,11 @@
-import { isNil } from '../check/isNil';
-import { isString } from '../check/isString';
+import isNil from '../check/isNil';
+import isString from '../check/isString';
 
-export function toBoolean(v: any): boolean | undefined;
-export function toBoolean<T>(v: any, defVal: T): boolean | T;
-export function toBoolean<T = boolean>(v: any, defVal?: T | boolean): boolean | T | undefined {
-  if (isString(v)) return ['true', 'ok', 'on', '1'].indexOf(String(v).toLowerCase()) !== -1;
-  return isNil(v) ? defVal : !!v;
+interface ToBoolean {
+  (v: any): boolean | undefined;
+  <T>(v: any, defVal: T): boolean | T;
 }
 
-export const bool = (v: any) => toBoolean(v);
+export default (<T = boolean>(v: any, defVal?: T | boolean): boolean | T | undefined => (
+  isString(v) ? ['true', 'ok', 'on', '1'].indexOf(String(v).toLowerCase()) !== -1 : isNil(v) ? defVal : !!v
+)) as ToBoolean

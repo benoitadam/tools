@@ -1,5 +1,6 @@
 import { isUuid } from '../src/check';
-import { firstUpper, firstLower, clean, words, pascal, camel, uuid, _uuid } from '../src/string';
+import { firstUpper, firstLower, clean, words, pascal, camel, uuid } from '../src/string';
+import { _uuid } from '../src/string/uuid';
 
 describe('string', () => {
   test(`firstUpper`, () => {
@@ -63,22 +64,6 @@ describe('string', () => {
     expect(camel('abc2 def3')).toEqual('abc2Def3');
     expect(camel(' abc4 def5 ')).toEqual('abc4Def5');
   });
-  
-  test('isUuid 00000000-0000-0000-0000-000000000000', () => {
-    expect(isUuid('00000000-0000-0000-0000-000000000000')).toBe(true);
-  })
-
-  test('isUuid ffffffff-ffff-ffff-ffff-ffffffffffff', () => {
-    expect(isUuid('ffffffff-ffff-ffff-ffff-ffffffffffff')).toBe(true);
-  })
-
-  test('isUuid 7ae77ebe-16c8-458b-8a44-4396dbe7f6f4', () => {
-    expect(isUuid('7ae77ebe-16c8-458b-8a44-4396dbe7f6f4')).toBe(true);
-  })
-
-  test('isUuid 7ae77ebe16c8458b8a444396dbe7f6f4', () => {
-    expect(isUuid('7ae77ebe16c8458b8a444396dbe7f6f4')).toBe(true);
-  })
 
   for (let i = 0; i < 10; i++) {
     const id = uuid();

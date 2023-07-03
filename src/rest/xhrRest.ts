@@ -66,11 +66,11 @@ export async function xhrRest<T = any>(xhr: XMLHttpRequest, url: RestURL, option
 
       if (options.onSuccess) options.onSuccess(xhr.response as T, xhr);
 
-      console.debug('Rest success', url, options, xhr.response);
+      // console.debug('Rest success', url, options, xhr.response);
       return xhr.response as T;
     }
     catch (err) {
-      console.debug('Rest error', url, options, err);
+      // console.debug('Rest error', url, options, err);
       const error = new RestError(xhr);
       if (options.onError) options.onError(error, xhr);
       throw error;

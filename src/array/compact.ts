@@ -1,5 +1,3 @@
-import toArray from "../cast/toArray";
-
 /**
  * Creates an array with all falsy values removed.
  * @param items

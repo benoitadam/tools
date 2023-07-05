@@ -1,4 +1,1 @@
-import isNull from "./isNull";
-import isUndefined from "./isUndefined";
-
-export default (value: any): boolean => isNull(value) || isUndefined(value);
+export default (value: any): value is null | undefined => value === null || value === undefined;

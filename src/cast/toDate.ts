@@ -1,7 +1,7 @@
 import isDate from "../check/isDate";
 import isString from "../check/isString";
 import isNumber from "../check/isNumber";
-import isUndefined from "../check/isUndefined";
+import isNil from "../check/isNil";
 
 interface ToDate {
   (v: any): Date;
@@ -13,5 +13,5 @@ export default (
   <TDef>(v: any, defVal?: TDef): Date | TDef | undefined =>
     isDate(v) ? v :
     isString(v) || isNumber(v) ? new Date(v) :
-    isUndefined(v) ? new Date() : defVal
+    isNil(v) ? new Date() : defVal
 ) as ToDate;

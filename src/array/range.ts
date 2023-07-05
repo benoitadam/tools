@@ -1,4 +1,4 @@
-import isUndefined from "../check/isUndefined";
+import isNil from "../check/isNil";
 
 interface Range {
   /**
@@ -17,8 +17,8 @@ interface Range {
   (length: number): number[];
 }
 
-const range = ((min: number, max?: number) => {
-  if (!isUndefined(max)) return range(max - min + 1).map((i) => i + min);
+const range = ((min: number, max?: number|null) => {
+  if (!isNil(max)) return range(max - min + 1).map((i) => i + min);
   return Array.from(Array(min).keys());
 }) as Range
 

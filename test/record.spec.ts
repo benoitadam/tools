@@ -1,4 +1,4 @@
-import { cloneRecord, deleteKey, groupBy, valueBy } from '../src/record';
+import { deleteKey, groupBy, valueBy } from '../src/record';
 
 describe('record', () => {
   const a = { id: 'a', p: 'pa', x: 0 };
@@ -14,11 +14,6 @@ describe('record', () => {
   //   const c = { id: 'kc', p: 'pc' };
   //   expect(byProp([a, b, c], i => i.p)).toEqual({ pa: a, pb: b, pc: c });
   // });
-
-  test(`cloneRecord`, () => {
-    expect(cloneRecord(record)).not.toBe(record);
-    expect(cloneRecord(record)).toEqual(record);
-  });
 
   test(`deleteKey`, () => {
     expect(deleteKey({ ...record }, 'a')).toEqual({ b, c, d });

@@ -1,4 +1,4 @@
-import { isArray, isDate, isEmpty, isRecord, isFunction, isNil, isString, isUndefined, isUuid } from '../src/check';
+import { isArray, isDate, isEmpty, isRecord, isFunction, isNil, isString, isUuid } from '../src/check';
 
 describe('check', () => {
   test(`isArray`, () => {
@@ -61,12 +61,6 @@ describe('check', () => {
     expect(isString([])).toBe(false);
   });
 
-  test(`isUndefined`, () => {
-    expect(isUndefined(undefined)).toBe(true);
-    expect(isUndefined(null)).toBe(false);
-    expect(isUndefined('')).toBe(false);
-  });
-  
   test('isUuid 00000000-0000-0000-0000-000000000000', () => {
     expect(isUuid('00000000-0000-0000-0000-000000000000')).toBe(true);
   })

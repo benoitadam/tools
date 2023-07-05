@@ -1,5 +1,6 @@
 export { default as arr } from './arr';
 export { default as bool } from './bool';
+export { default as me } from './me';
 export { default as nbr } from './nbr';
 export { default as rec } from './rec';
 export { default as srt } from './str';
@@ -7,6 +8,7 @@ export { default as toArray } from './toArray';
 export { default as toBoolean } from './toBoolean';
 export { default as toDate } from './toDate';
 export { default as toError } from './toError';
+export { default as toNull } from './toNull';
 export { default as toNumber } from './toNumber';
 export { default as toRecord } from './toRecord';
 export { default as toString } from './toString';

@@ -61,6 +61,11 @@ export default class Observer<T = any> implements ISubscribe<T> {
     return { unsubscribe: this.on(handler) }
   }
 
+  pipe(observer: Observer<T>) {
+    observer.set(this.val);
+    return this.on(val => observer.set(val));
+  }
+
   on(h: ObserverHandler<T>) {
     this.hs.push(h);
     if (!this.srcOff && this.src && this.srcH) {

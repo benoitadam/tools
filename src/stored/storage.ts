@@ -13,7 +13,10 @@ let _storage: IStorage = globalThis.localStorage || {
   setItem: (key: string, value: string) => (values[key] = value),
 };
 
-export default (storage?: IStorage) => {
-  if (storage) _storage = storage;
+export function getStorage() {
   return _storage;
+}
+
+export function setStorage(storage: IStorage) {
+  _storage = storage;
 }

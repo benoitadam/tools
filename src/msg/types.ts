@@ -19,12 +19,17 @@ export interface IMsgSet<T> {
   set(value: T): IMsg<T>;
 }
 
-export interface IMsgReadonly<T> extends IMsgGet<T>, IMsgSubscribe<T> {
+export interface IMsgOn<T> {
+  on(h: IMsgHandler<T>): () => void;
+}
+
+export interface IMsgGetAndOn<T> extends IMsgGet<T>, IMsgOn<T> {}
+
+export interface IMsgReadonly<T> extends IMsgGetAndOn<T>, IMsgSubscribe<T> {
   get key(): string|undefined;
   get val(): T;
   get value(): T;
 
-  on(h: IMsgHandler<T>): () => void;
   off(h: IMsgHandler<T>): void;
 
   map<U>(cb: (val: T) => U): IMsgReadonly<U>;

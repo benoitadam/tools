@@ -4,4 +4,6 @@
  * @param items
  * @returns
  */
-export default <T>(items: T[]) => items[items.length - 1];
+export default function last<T>(items: T[]) {
+    return items[items.length - 1];
+}

@@ -1,3 +1,5 @@
 import toBoolean from "./toBoolean";
 
-export default (v: any) => toBoolean(v);
+export default function bool(v: any) {
+  return toBoolean(v);
+}

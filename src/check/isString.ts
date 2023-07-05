@@ -1,1 +1,3 @@
-export default (value: any): value is string => typeof value === 'string';
+export default function isString(value: any): value is string {
+    return typeof value === 'string';
+}

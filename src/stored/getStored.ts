@@ -1,9 +1,8 @@
 import parseJson from '../json/parseJson';
-import storage from './storage';
+import { getStorage } from './storage';
 
-interface GetStored {
-  <T = any>(key: string): T | undefined;
-  <T = any>(key: string, defVal?: T): T;
+export default function getStored<T = any>(key: string): T | undefined;
+export default function getStored<T = any>(key: string, defVal?: T): T;
+export default function getStored<T = any>(key: string, defVal?: T): T | undefined {
+  return parseJson(getStorage().getItem(key), defVal);
 }
-
-export default (<T = any>(key: string, defVal?: T): T | undefined => parseJson(storage().getItem(key), defVal)) as GetStored

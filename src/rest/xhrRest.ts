@@ -10,7 +10,7 @@ const acceptMap: Partial<Record<RestResponseType, string>> = {
   arraybuffer: '*/*',
 };
 
-export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestOptions<T> = {}): Promise<T> => {
+export default async function xhrRest<T>(xhr: XMLHttpRequest, url: RestURL, options: RestOptions<T> = {}): Promise<T> {
   try {
     if (options.onInit) options.onInit(xhr);
 

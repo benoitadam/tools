@@ -46,6 +46,7 @@
     "@types/jest": "^29.5.2",
     "@types/react": "^18.2.14",
     "esbuild": "^0.18.11",
+    "esbuild-node-externals": "^1.8.0",
     "jest": "^29.5.0",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
@@ -54,7 +55,8 @@
   },
   "peerDependenciesMeta": {},
   "scripts": {
-    "build": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16,node12 --minify --outfile=dist.js",
+    "build": "node build.js",
+    "_build": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16,node12 --minify --outfile=dist.js",
     "_build-browser": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16 --minify --outfile=browser.js",
     "_build-node12": "npx esbuild --bundle ./src/index.ts --platform=node --sourcemap --target=node12 --minify --outfile=node12.js",
     "pretest": "npx esbuild --bundle test/all.spec.ts --sourcemap --outfile=build/all.spec.js",

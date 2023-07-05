@@ -1,1 +1,3 @@
-export default (arg1: number, arg2: number): number => Math.abs(arg1 - arg2);
+export default function diff(a: number, b: number): number {
+    return Math.abs(a - b);
+}

@@ -1,9 +1,9 @@
 import isNil from '../check/isNil';
 import getJson from '../json/getJson';
-import storage from './storage';
+import { getStorage } from './storage';
 
-export default <T = any>(key: string, value: T) => {
+export default function setStored<T = any>(key: string, value: T) {
   const json = isNil(value) ? undefined : getJson(value);
-  if (isNil(json)) storage().removeItem(key);
-  else storage().setItem(key, json);
+  if (isNil(json)) getStorage().removeItem(key);
+  else getStorage().setItem(key, json);
 }

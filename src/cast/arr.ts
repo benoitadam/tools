@@ -1,3 +1,5 @@
 import toArray from "./toArray";
 
-export default <T = any>(v: T[] | T | null | undefined) => toArray(v);
+export default function arr<T = any>(v: T[] | T | null | undefined) {
+    return toArray(v);
+}

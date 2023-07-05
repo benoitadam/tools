@@ -1,4 +1,6 @@
 import firstLower from './firstLower';
 import pascal from './pascal';
 
-export default (arg: string): string => firstLower(pascal(arg));
+export default function camel(arg: string): string {
+    return firstLower(pascal(arg));
+}

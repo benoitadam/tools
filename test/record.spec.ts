@@ -35,9 +35,9 @@ describe('record', () => {
     expect(valueBy(items, null, null)).toEqual({ 0: a, 1: b, 2: c, 3: d });
     expect(valueBy(items, i => i.id)).toEqual({ a, b, c, d });
     expect(valueBy(items, i => i.p)).toEqual({ pa: a, pb: b, pc: c, pd: d });
-    expect(valueBy(items, i => i.x)).toEqual({ 0: b, 1: c, 2: d });
-    expect(valueBy(items, i => i.x, i => i.p)).toEqual({ 0: 'pb', 1: 'pc', 2: 'pd' });
-    expect(valueBy(record, i => i.x)).toEqual({ 0: b, 1: c, 2: d });
+    expect(valueBy(items, i => i.x)).toEqual({ 0: a, 1: c, 2: d });
+    expect(valueBy(items, i => i.x, i => i.p)).toEqual({ 0: 'pa', 1: 'pc', 2: 'pd' });
+    expect(valueBy(record, i => i.x)).toEqual({ 0: a, 1: c, 2: d });
     expect(valueBy(record, null, i => i.x)).toEqual({ a: 0, b: 0, c: 1, d: 2 });
   });
 });

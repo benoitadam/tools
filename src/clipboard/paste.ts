@@ -1,7 +1,7 @@
 import parseJson from '../json/parseJson';
 import getStored from '../stored/getStored';
 
-export default () => {
+export default function paste() {
   if (navigator && navigator.clipboard) {
     return navigator.clipboard
       .readText()

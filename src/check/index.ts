@@ -1,4 +1,3 @@
-export { default as isArray } from './isArray';
 export { default as isDate } from './isDate';
 export { default as isEmpty } from './isEmpty';
 export { default as isEquals } from './isEquals';

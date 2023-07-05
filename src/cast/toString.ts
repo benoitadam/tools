@@ -1,3 +1,5 @@
 import isNil from '../check/isNil';
 
-export default (v: any, def: string = ''): string => isNil(v) ? def : String(v);
+export default function toString(v: any, def: string = ''): string {
+    return isNil(v) ? def : String(v);
+}

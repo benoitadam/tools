@@ -1,12 +1,6 @@
-import { isArray, isDate, isEmpty, isRecord, isFunction, isNil, isString, isUuid } from '../src/check';
+import { isDate, isEmpty, isRecord, isFunction, isNil, isString, isUuid } from '../src/check';
 
 describe('check', () => {
-  test(`isArray`, () => {
-    expect(isArray(0)).toBe(false);
-    expect(isArray({})).toBe(false);
-    expect(isArray([])).toBe(true);
-  });
-
   test(`isDate`, () => {
     expect(isDate(0)).toBe(false);
     expect(isDate({})).toBe(false);

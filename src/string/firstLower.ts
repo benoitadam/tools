@@ -1,1 +1,2 @@
-export default (arg: string): string => arg ? arg[0].toLowerCase() + arg.substring(1) : arg;
+export default function firstLower(arg: string): string {
+    return arg ? arg[0].toLowerCase() + arg.substring(1) : arg;}

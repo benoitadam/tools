@@ -12,4 +12,5 @@ export { default as toNull } from './toNull';
 export { default as toNumber } from './toNumber';
 export { default as toRecord } from './toRecord';
 export { default as toString } from './toString';
+export { default as toVoid } from './toVoid';
 export { default as tryCatch } from './tryCatch';

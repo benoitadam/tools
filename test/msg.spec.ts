@@ -1,9 +1,9 @@
-import { Observer, getObserver } from '../src/observer';
+import { Msg } from '../src/msg';
 import sleep from '../src/promise/sleep';
 
-describe('Observer', () => {
-  test(`Observer set and on off`, () => {
-    const o1 = new Observer(0);
+describe('Msg', () => {
+  test(`Msg set and on off`, () => {
+    const o1 = new Msg(0);
     expect(o1.get()).toEqual(0);
 
     let a = -1;
@@ -30,15 +30,15 @@ describe('Observer', () => {
     expect(b).toEqual(2);
   });
   
-  test(`Observer set callback`, () => {
-    const o1 = new Observer(0);
+  test(`Msg next callback`, () => {
+    const o1 = new Msg(0);
     expect(o1.val).toEqual(0);
-    o1.set(v => v + 1);
+    o1.next(v => v + 1);
     expect(o1.val).toEqual(1);
   });
 
-  test(`Observer toPromise`, async () => {
-    const o1 = new Observer(0);
+  test(`Msg toPromise`, async () => {
+    const o1 = new Msg(0);
 
     let a = 1;
     o1.toPromise((val) => val === 3).then((val) => (a = val));
@@ -54,8 +54,8 @@ describe('Observer', () => {
     expect(b).toEqual(3);
   });
 
-  test(`Observer map`, async () => {
-    const o1 = new Observer(0);
+  test(`Msg map`, async () => {
+    const o1 = new Msg(0);
     const map = o1.map(v => v + 1);
     let v = map.get();
 
@@ -69,8 +69,8 @@ describe('Observer', () => {
     expect(v).toEqual(51);
   });
 
-  test(`Observer getter setter`, () => {
-    const o1 = new Observer(0);
+  test(`Msg getter setter`, () => {
+    const o1 = new Msg(0);
     const getVal = o1.get.bind(o1);
     const setVal = o1.set.bind(o1);
 
@@ -81,13 +81,14 @@ describe('Observer', () => {
     expect(getVal.call(this)).toEqual(2);
   });
 
-  test('getObserver', () => {
-    expect(getObserver(null, 1)).not.toEqual(getObserver(null, 2));
-    expect(getObserver('a', 1)).toEqual(getObserver('a', 2));
+  test('Msg.get', () => {
+    expect(Msg.get('a', 1)).toEqual(Msg.get('a', 2));
+    expect(Msg.get('a', 1)).toEqual(Msg.get('a', 3));
+    expect(Msg.get('b', 1)).not.toEqual(Msg.get('a', 2));
   });
 
   test(`debounce`, async () => {
-    const m0 = new Observer(0);
+    const m0 = new Msg(0);
     const m1 = m0.debounce(5);
 
     let last = -1;
@@ -118,7 +119,7 @@ describe('Observer', () => {
   });
 
   test(`throttle`, async () => {
-    const m0 = new Observer(0);
+    const m0 = new Msg(0);
     const m1 = m0.throttle(5);
 
     let last = -1;

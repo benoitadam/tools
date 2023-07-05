@@ -1,0 +1,1 @@
+export { default as useMsg } from './useMsg';

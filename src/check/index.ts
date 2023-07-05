@@ -4,6 +4,7 @@ export { default as isEmpty } from './isEmpty';
 export { default as isEquals } from './isEquals';
 export { default as isFunction } from './isFunction';
 export { default as isNil } from './isNil';
+export { default as isNotNull } from './isNotNull';
 export { default as isRecord } from './isRecord';
 export { default as isString } from './isString';
 export { default as isUuid } from './isUuid';

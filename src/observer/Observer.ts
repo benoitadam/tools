@@ -7,11 +7,11 @@ export type ObserverHandler<T> = (value: T, oldValue: T) => void;
 export type ObserverFilter<T> = (value: T) => boolean;
 const nullObserverFilter: ObserverFilter<any> = (v: any) => v !== null && v !== undefined;
 
-interface ISubscription {
+export interface ISubscription {
 	unsubscribe(): void;
 }
 
-interface ISubscribe<T> {
+export interface ISubscribe<T> {
 	subscribe(handler: (next: T) => void): ISubscription;
 }
 

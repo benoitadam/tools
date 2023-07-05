@@ -1,3 +1,4 @@
+import isFunction from '../check/isFunction';
 import getStored from '../stored/getStored';
 import setStored from '../stored/setStored';
 
@@ -6,7 +7,15 @@ export type ObserverHandler<T> = (value: T, oldValue: T) => void;
 export type ObserverFilter<T> = (value: T) => boolean;
 const nullObserverFilter: ObserverFilter<any> = (v: any) => v !== null && v !== undefined;
 
-export default class Observer<T = any> {
+interface ISubscription {
+	unsubscribe(): void;
+}
+
+interface ISubscribe<T> {
+	subscribe(handler: (next: T) => void): ISubscription;
+}
+
+export default class Observer<T = any> implements ISubscribe<T> {
   /** Value */
   val: T;
   key?: string;
@@ -27,17 +36,29 @@ export default class Observer<T = any> {
     if (key) this.key = key;
   }
 
+  get value() {
+    return this.get();
+  }
+
   get() {
     return this.val;
   }
 
-  set(value: T | ((value: T) => T)) {
-    const old = this.val;
-    this.val = typeof value === 'function' ? (value as (value: T) => T)(this.val) : (value as T);
-    if (old !== this.val) {
+  next(value: T) {
+    if (value !== this.val) {
+      const old = this.val;
+      this.val = value;
       this.hs.forEach((h) => h(this.val, old));
     }
     return this;
+  }
+
+  set(value: T | ((value: T) => T)) {
+    return this.next(isFunction(value) ? value(this.val) : value);
+  }
+
+  subscribe(handler: (next: T) => void): ISubscription {
+    return { unsubscribe: this.on(handler) }
   }
 
   on(h: ObserverHandler<T>) {

@@ -11,8 +11,8 @@ const acceptMap: Partial<Record<RestResponseType, string>> = {
   arraybuffer: '*/*',
 };
 
-export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestOptions<T> = {}): Promise<T> => {
-  try {
+export default <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestOptions<T> = {}): Promise<T> => {
+  return new Promise((resolve, reject) => {
     if (options.onInit) options.onInit(xhr);
 
     xhr.timeout = options.timeout || 20000;
@@ -55,26 +55,23 @@ export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestO
 
     const body = options.data ? JSON.stringify(options.data) : options.formData;
 
-    const waitResponse = new Promise((resolve, reject) => {
-      xhr.onload = resolve;
-      xhr.onerror = reject;
-    });
+    xhr.onload = () => {
+      if (xhr.status >= 400) throw xhr.status;
+
+      if (options.onSuccess) options.onSuccess(xhr.response as T, xhr);
+  
+      // console.debug('Rest success', url, options, xhr.response);
+      resolve(xhr.response as T);
+    };
+
+    xhr.onerror = () => {
+      // console.debug('Rest error', url, options, err);
+      const error = new RestError(xhr);
+      if (options.onError) options.onError(error, xhr);
+      reject(error);
+    };
 
     if (options.send) options.send(xhr, body);
     else xhr.send(body);
-
-    await waitResponse;
-
-    if (xhr.status >= 400) throw xhr.status;
-
-    if (options.onSuccess) options.onSuccess(xhr.response as T, xhr);
-
-    // console.debug('Rest success', url, options, xhr.response);
-    return xhr.response as T;
-  } catch (err) {
-    // console.debug('Rest error', url, options, err);
-    const error = new RestError(xhr);
-    if (options.onError) options.onError(error, xhr);
-    throw error;
-  }
+  });
 };

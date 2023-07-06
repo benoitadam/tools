@@ -24,8 +24,32 @@ function build(outfile, options) {
     });
 }
 
-build('lib/index.js', { target: ['chrome58', 'firefox57', 'safari11', 'edge16', 'node12'] });
-build('build/all.spec.js', { minify: false, entryPoints: ['test/all.spec.ts'] });
+const nodeConfig = {
+  define: {
+    "__NODE_JS__": "true",
+    // "global.crypto": "\"require('crypto')\"",
+    // "global.XMLHttpRequest": "require('xmlhttprequest').XMLHttpRequest"
+  },
+  platform: 'node',
+  target: ['node12']
+}
+
+build('lib/node.js', {
+  ...nodeConfig
+});
+
+build('lib/index.js', {
+  define: {
+    "__NODE_JS__": "false",
+  },
+  target: ['chrome58', 'firefox57', 'safari11', 'edge16']
+});
+
+build('build/all.spec.js', {
+  ...nodeConfig,
+  minify: false,
+  entryPoints: ['test/all.spec.ts']
+});
 
 // build('lib/index.esm.js', { format: 'esm', target: ['esnext'] });
 // build('lib/index.node.js', { platform: 'node', target: ['node12'] });

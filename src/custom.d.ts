@@ -1,0 +1,1 @@
+declare var __NODE_JS__: boolean;

@@ -452,7 +452,7 @@ declare module "promise/index" {
     export { default as withTimeout } from "promise/withTimeout";
 }
 declare module "react/useConstant" {
-    const _default_49: <T>(fn: () => T) => T;
+    const _default_49: (<T>(fn: () => T) => T) | undefined;
     export default _default_49;
 }
 declare module "react/useMsg" {
@@ -461,7 +461,7 @@ declare module "react/useMsg" {
         <T = any>(msg: Msg<T>): T;
         <T = any>(msg: Msg<T> | null | undefined): T | undefined;
     }
-    const _default_50: UseMsg;
+    const _default_50: UseMsg | undefined;
     export default _default_50;
 }
 declare module "react/index" {
@@ -590,8 +590,7 @@ declare module "string/camel" {
     export default _default_60;
 }
 declare module "string/uuid" {
-    export const _uuid: (crypto: any) => any;
-    const _default_61: any;
+    const _default_61: () => string;
     export default _default_61;
 }
 declare module "string/index" {
@@ -617,6 +616,7 @@ declare module "index" {
     export * from "rest/index";
     export * from "stored/index";
     export * from "string/index";
+    export const helloWorld: string;
 }
 declare module "array/first" {
     /**

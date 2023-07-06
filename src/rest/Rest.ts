@@ -1,6 +1,10 @@
 import xhrRest from './xhrRest';
 import { RestData, RestOptions, RestURL } from './types';
 
+if (__NODE_JS__) {
+  global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+}
+
 export default class Rest {
   constructor(public options?: RestOptions) {}
 
@@ -9,7 +13,7 @@ export default class Rest {
   }
 
   newXhr() {
-    return new XMLHttpRequest();
+    return new global.XMLHttpRequest();
   }
 
   send<T = any>(url: RestURL, options: RestOptions<T> = {}) {

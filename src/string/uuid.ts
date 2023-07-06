@@ -1,16 +1,17 @@
-export const _uuid = (crypto: any) => {
-  if (crypto.randomUUID) {
-    return crypto.randomUUID.bind(crypto);
-  }
-  if (crypto.getRandomValues) {
-    return () => {
-      var buff = new Uint16Array(8);
-      crypto.getRandomValues(buff);
-      const S = (i: number) => buff[i].toString(16).padStart(4, '0');
-      return S(0) + S(1) + '-' + S(2) + '-' + S(3) + '-' + S(4) + '-' + S(5) + S(6) + S(7);
-    };
-  }
-  return () => {
+if (__NODE_JS__) {
+  global.crypto = require('crypto');
+}
+
+const crypto = global.crypto || {};
+
+export default (() => (
+  crypto.randomUUID ? crypto.randomUUID :
+  crypto.getRandomValues ? (() => {
+    var buff = new Uint16Array(8);
+    crypto.getRandomValues(buff);
+    const S = (i: number) => buff[i].toString(16).padStart(4, '0');
+    return S(0) + S(1) + '-' + S(2) + '-' + S(3) + '-' + S(4) + '-' + S(5) + S(6) + S(7);
+  }) : (() => {
     let h = '0123456789abcdef';
     let k = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
     let u = '',
@@ -24,7 +25,5 @@ export const _uuid = (crypto: any) => {
       rb = i % 8 == 0 ? (Math.random() * 0xffffffff) | 0 : rb >> 4;
     }
     return u;
-  };
-};
-
-export default _uuid(global.crypto || {});
+  })
+))();

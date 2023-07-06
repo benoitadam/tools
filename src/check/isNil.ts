@@ -1,3 +1,1 @@
-export default function isNil(value: any): value is null | undefined {
-    return value === null || value === undefined;
-}
+export default (value: any): value is null | undefined => value === null || value === undefined;

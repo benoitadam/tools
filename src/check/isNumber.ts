@@ -1,3 +1,1 @@
-export default function isNumber(value: any): value is number {
-    return typeof value === 'number';
-}
+export default (value: any): value is number => typeof value === 'number';

@@ -8,4 +8,4 @@ export default async function retry<T>(createPromise: () => Promise<T>, retry = 
     }
   }
   throw error;
-}
+};

@@ -1,6 +1,6 @@
 {
   "name": "tools",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "private": false,
   "description": "Several small practical and light tools.",
   "license": "MIT",
@@ -12,7 +12,9 @@
   "engines": {
     "node": ">=12.0.0"
   },
-  "main": "dist.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/benoitadam/tools.git"
@@ -55,11 +57,9 @@
   },
   "peerDependenciesMeta": {},
   "scripts": {
-    "build": "node build.js",
-    "_build": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16,node12 --minify --outfile=dist.js",
-    "_build-browser": "npx esbuild --bundle ./src/index.ts --sourcemap --target=chrome58,firefox57,safari11,edge16 --minify --outfile=browser.js",
-    "_build-node12": "npx esbuild --bundle ./src/index.ts --platform=node --sourcemap --target=node12 --minify --outfile=node12.js",
-    "pretest": "npx esbuild --bundle test/all.spec.ts --sourcemap --outfile=build/all.spec.js",
+    "prebuild": "tsc",
+    "build": "node esbuild.js",
+    "pretest": "npm run build",
     "test": "jest build/all.spec.js --verbose",
     "prettify": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json}\""
   },

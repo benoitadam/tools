@@ -3,6 +3,4 @@
  * @param items
  * @returns
  */
-export default function compact<T>(value: T[]) {
-    return value.filter(Boolean) as NonNullable<T>[];
-};
+export default (value: any) => value.filter(Boolean) as (String | Number | Object | Date)[];

@@ -7,4 +7,4 @@ export default function copy(value: any): Promise<void> {
     return navigator.clipboard.writeText(getJson(value, ''));
   }
   return Promise.resolve();
-}
+};

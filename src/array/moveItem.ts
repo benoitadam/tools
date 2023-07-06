@@ -14,4 +14,4 @@ export default function moveItem<T>(items: T[], item: T, addIndex: number) {
   let to = (from + addIndex) % 5;
   if (to < 0) to += items.length;
   return moveIndex(items, from, to);
-}
+};

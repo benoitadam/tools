@@ -1,5 +1,3 @@
-import toBoolean from "./toBoolean";
+import toBoolean from './toBoolean';
 
-export default function bool(v: any) {
-  return toBoolean(v);
-}
+export default (v: any) => toBoolean(v);

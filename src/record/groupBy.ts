@@ -7,11 +7,17 @@ export type IVal<T, U> = undefined | null | keyof T | ((item: T, index: number) 
 export type RKey<T> = undefined | null | keyof T | ((item: T, key: string) => any);
 export type RVal<T, U> = undefined | null | keyof T | ((item: T, key: string) => U);
 
-export default function groupBy<T>(items: T[], key: IKey<T>): Record<string, T[]>;
-export default function groupBy<T, U>(items: T[], key: IKey<T>, val: IVal<T, U>): Record<string, U[]>;
-export default function groupBy<T>(record: Record<string, T>, key: RKey<T>): Record<string, T[]>;
-export default function groupBy<T, U>(record: Record<string, T>, key: RKey<T>, val: RVal<T, U>): Record<string, U[]>;
-export default function groupBy(items: any[]|Record<string, any>, key: any, val?: any): Record<string, any[]> {
+type RKey<T> = undefined | null | keyof T | ((item: T, key: string) => any);
+type RVal<T, U> = undefined | null | keyof T | ((item: T, key: string) => U);
+
+interface GroupBy {
+  <T>(items: T[], key: IKey<T>): Record<string, T[]>;
+  <T, U>(items: T[], key: IKey<T>, val: IVal<T, U>): Record<string, U[]>;
+  <T>(record: Record<string, T>, key: RKey<T>): Record<string, T[]>;
+  <T, U>(record: Record<string, T>, key: RKey<T>, val: RVal<T, U>): Record<string, U[]>;
+}
+
+export default ((items: any, key: any, val?: any): Record<string, any[]> => {
   const r: Record<string, any[]> = {};
   const getK = isFunction(key) ? key : isNil(key) ? (_: any, k: any) => k : (i: any) => i[key];
   const getV = isFunction(val) ? val : isNil(val) ? (i: any) => i : (i: any) => i[val];
@@ -22,11 +28,12 @@ export default function groupBy(items: any[]|Record<string, any>, key: any, val?
     });
   }
   if (isRecord(items)) {
-    Object.entries(items).forEach(kv => {
-      const key = kv[0], val = kv[1];
+    Object.entries(items).forEach((kv) => {
+      const key = kv[0],
+        val = kv[1];
       const k = getK(val, key);
       (r[k] || (r[k] = [])).push(getV(val, key));
     });
   }
   return r;
-};
+}) as GroupBy;

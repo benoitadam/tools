@@ -15,8 +15,4 @@ let _storage: IStorage = globalThis.localStorage || {
 
 export function getStorage() {
   return _storage;
-}
-
-export function setStorage(storage: IStorage) {
-  _storage = storage;
-}
+};

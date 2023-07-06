@@ -1,4 +1,4 @@
-import isNil from "../check/isNil";
+import isNil from '../check/isNil';
 
 /**
  * Returns an array of min to max item
@@ -17,7 +17,16 @@ return [0, 1, 2]
   */
 export default function range(length: number): number[];
 
+<<<<<<< HEAD
 export default function range(min: number, max?: number | null) {
   if (!isNil(max)) return range(max - min + 1).map(i => i + min);
   return Array.from(Array(min).keys());
 }
+=======
+const range = ((min: number, max?: number | null) => {
+  if (!isNil(max)) return range(max - min + 1).map((i) => i + min);
+  return Array.from(Array(min).keys());
+}) as Range;
+
+export default range;
+>>>>>>> esbuild

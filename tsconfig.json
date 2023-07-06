@@ -1,14 +1,16 @@
 {
-    "include": ["**/*"],
+  "include": ["src/**/*"],
     "compilerOptions": {
-        "outDir": "./build",
-        "lib": ["es2019", "es2020.promise", "es2020.bigint", "es2020.string", "DOM"],
-        "module": "commonjs",
-        "target": "es2019",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node"
+      "declaration": true,
+      "target": "esnext",
+      "lib": ["esnext", "dom"],
+      "strict": true,
+      "noImplicitAny": false,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      
+      "rootDir": "src",
+      "outFile": "lib/index.d.ts",
+      "emitDeclarationOnly": true
     }
-}
+  }

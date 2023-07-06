@@ -1,6 +1,4 @@
 import firstUpper from './firstUpper';
 import words from './words';
 
-export default function pascal(str: any): string {
-    return words(str).map(firstUpper).join('');
-}
+export default (arg: any): string => words(arg).map(firstUpper).join('');

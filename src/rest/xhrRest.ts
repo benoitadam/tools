@@ -1,3 +1,4 @@
+import isFunction from '../check/isFunction';
 import RestError from './RestError';
 import { RestOptions, RestResponseType, RestURL } from './types';
 
@@ -20,8 +21,9 @@ export default async function xhrRest<T>(xhr: XMLHttpRequest, url: RestURL, opti
     if (options.params || options.baseUrl) {
       const urlObj = new URL(url, options.baseUrl);
       if (options.params) {
-        Object.entries(options.params).forEach(kv => {
-          const key = kv[0], val = kv[1];
+        Object.entries(options.params).forEach((kv) => {
+          const key = kv[0],
+            val = kv[1];
           if (Array.isArray(val)) {
             urlObj.searchParams.delete(key);
             Object.values(val).forEach((p) => urlObj.searchParams.append(key, String(p)));
@@ -42,8 +44,8 @@ export default async function xhrRest<T>(xhr: XMLHttpRequest, url: RestURL, opti
     if (options.data) xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Accept', acceptMap[xhr.responseType] || acceptJson);
     if (options.headers) {
-      const headers = typeof options.headers === 'function' ? options.headers() : options.headers;
-      Object.entries(headers).forEach(kv => xhr.setRequestHeader(kv[0], kv[1]));
+      const headers = isFunction(options.headers) ? options.headers() : options.headers;
+      Object.entries(headers).forEach((kv) => xhr.setRequestHeader(kv[0], kv[1]));
     }
 
     if (options.onProgress) {
@@ -75,4 +77,4 @@ export default async function xhrRest<T>(xhr: XMLHttpRequest, url: RestURL, opti
     if (options.onError) options.onError(error, xhr);
     throw error;
   }
-}
+};

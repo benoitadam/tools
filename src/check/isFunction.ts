@@ -1,3 +1,1 @@
-export default function isFunction(value: any): value is Function {
-    return value instanceof Function;
-}
+export default (value: any): value is Function => value instanceof Function;

@@ -1,12 +1,12 @@
-import { isFunction } from "../check";
+interface TryCatch {
+  <T = any>(v: () => any): T | undefined;
+  <T = any, U = any>(v: () => any, def: U): T | U;
+}
 
-export default function tryCatch<T>(fun: () => T): T | undefined;
-export default function tryCatch<T, U>(fun: () => T, def: () => U): T | U;
-export default function tryCatch<T, U>(fun: () => T, def: U): T | U;
-export default function tryCatch(fun: () => any, def?: any): any {
+export default ((fun: () => any, def: any): any => {
   try {
     return fun();
   } catch (error) {
-    return isFunction(def) ? def() : def;
+    return def;
   }
-}
+}) as TryCatch;

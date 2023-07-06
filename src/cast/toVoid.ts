@@ -1,3 +1,1 @@
-export default function toVoid() {
-  return {};
-}
+export default () => {};

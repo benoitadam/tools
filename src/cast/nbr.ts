@@ -1,5 +1,3 @@
-import toNumber from "./toNumber";
+import toNumber from './toNumber';
 
-export default function nbr(v: any) {
-  return toNumber(v, 0);
-}
+export default (v: any) => toNumber(v, 0);

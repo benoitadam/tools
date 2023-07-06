@@ -44,8 +44,8 @@ export default class Msg<T = any> implements IMsg<T> {
   get value(): T {
     return this.get();
   }
-  
-  get key(): string|undefined {
+
+  get key(): string | undefined {
     return this.k;
   }
 
@@ -67,12 +67,12 @@ export default class Msg<T = any> implements IMsg<T> {
   }
 
   subscribe(handler: (next: T) => void): IMsgSubscription {
-    return { unsubscribe: this.on(handler) }
+    return { unsubscribe: this.on(handler) };
   }
 
   pipe(target: IMsgSet<T>) {
     target.set(this.v);
-    return this.on(val => target.set(val));
+    return this.on((val) => target.set(val));
   }
 
   on(h: IMsgHandler<T>) {

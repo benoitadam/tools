@@ -1,1 +1,1 @@
-export default function me<T=any>(value: T): T { return value; }
+export default <T = any>(value: T): T => value;

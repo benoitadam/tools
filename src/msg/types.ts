@@ -1,4 +1,3 @@
-
 export type IMsgHandler<T> = (value: T, oldValue: T) => void;
 
 export type IMsgFilter<T> = (value: T) => boolean;
@@ -19,14 +18,8 @@ export interface IMsgSet<T> {
   set(value: T): IMsg<T>;
 }
 
-export interface IMsgOn<T> {
-  on(h: IMsgHandler<T>): () => void;
-}
-
-export interface IMsgGetAndOn<T> extends IMsgGet<T>, IMsgOn<T> {}
-
-export interface IMsgReadonly<T> extends IMsgGetAndOn<T>, IMsgSubscribe<T> {
-  get key(): string|undefined;
+export interface IMsgReadonly<T> extends IMsgGet<T>, IMsgSubscribe<T> {
+  get key(): string | undefined;
   get val(): T;
   get value(): T;
 

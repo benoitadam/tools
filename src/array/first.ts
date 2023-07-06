@@ -4,6 +4,4 @@
  * @param items
  * @returns
  */
-export default function first<T>(items: T[]) {
-    return items[0];
-};
+export default <T>(items: T[]) => items[0];

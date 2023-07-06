@@ -1,3 +1,4 @@
+import isFunction from '../check/isFunction';
 import RestError from './RestError';
 import { RestOptions, RestResponseType, RestURL } from './types';
 
@@ -42,7 +43,7 @@ export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestO
     if (options.data) xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Accept', acceptMap[xhr.responseType] || acceptJson);
     if (options.headers) {
-      const headers = typeof options.headers === 'function' ? options.headers() : options.headers;
+      const headers = isFunction(options.headers) ? options.headers() : options.headers;
       Object.entries(headers).forEach(kv => xhr.setRequestHeader(kv[0], kv[1]));
     }
 

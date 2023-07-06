@@ -10,4 +10,4 @@ export default <T>(items: T[], item: T) => {
   if (i === -1) return items;
   items.splice(i, 1);
   return items;
-}
+};

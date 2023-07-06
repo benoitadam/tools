@@ -16,4 +16,4 @@ let _storage: IStorage = globalThis.localStorage || {
 export default (storage?: IStorage) => {
   if (storage) _storage = storage;
   return _storage;
-}
+};

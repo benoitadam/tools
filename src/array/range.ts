@@ -1,4 +1,4 @@
-import isNil from "../check/isNil";
+import isNil from '../check/isNil';
 
 interface Range {
   /**
@@ -17,9 +17,9 @@ interface Range {
   (length: number): number[];
 }
 
-const range = ((min: number, max?: number|null) => {
+const range = ((min: number, max?: number | null) => {
   if (!isNil(max)) return range(max - min + 1).map((i) => i + min);
   return Array.from(Array(min).keys());
-}) as Range
+}) as Range;
 
 export default range;

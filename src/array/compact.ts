@@ -3,4 +3,4 @@
  * @param items
  * @returns
  */
-export default (value: any) => value.filter(Boolean) as (String|Number|Object|Date)[];
+export default (value: any) => value.filter(Boolean) as (String | Number | Object | Date)[];

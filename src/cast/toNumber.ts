@@ -1,4 +1,4 @@
-import isString from "../check/isString";
+import isString from '../check/isString';
 
 interface ToNumber {
   (v: any): number | undefined;

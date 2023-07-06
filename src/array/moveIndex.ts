@@ -11,4 +11,4 @@ export default <T>(items: T[], from: number, to: number) => {
   const removes = items.splice(from, 1);
   items.splice(to, 0, removes[0]);
   return items;
-}
+};

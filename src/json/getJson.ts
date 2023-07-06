@@ -1,4 +1,4 @@
-import tryCatch from "../cast/tryCatch";
+import tryCatch from '../cast/tryCatch';
 
 interface GetJson {
   (v: any): string | undefined;
@@ -6,5 +6,4 @@ interface GetJson {
 }
 
 export default (<T>(v: any, def?: T, indented?: boolean): string | T | undefined =>
-  tryCatch(() => JSON.stringify(v, null, indented ? 2 : 0), def)
-) as GetJson
+  tryCatch(() => JSON.stringify(v, null, indented ? 2 : 0), def)) as GetJson;

@@ -6,4 +6,5 @@ interface GetStored {
   <T = any>(key: string, defVal?: T): T;
 }
 
-export default (<T = any>(key: string, defVal?: T): T | undefined => parseJson(storage().getItem(key), defVal)) as GetStored
+export default (<T = any>(key: string, defVal?: T): T | undefined =>
+  parseJson(storage().getItem(key), defVal)) as GetStored;

@@ -1,4 +1,4 @@
-import TimeoutError from "./TimeoutError";
+import TimeoutError from './TimeoutError';
 
 export default <T>(promise: Promise<T>, timeoutMs = 5000): Promise<T> => {
   return new Promise<T>((resolve, reject) => {
@@ -8,4 +8,4 @@ export default <T>(promise: Promise<T>, timeoutMs = 5000): Promise<T> => {
       .catch(reject)
       .finally(() => clearTimeout(t));
   });
-}
+};

@@ -9,4 +9,4 @@ export default () => {
       .catch(() => getStored('__clipboard'));
   }
   return Promise.resolve(getStored('__clipboard'));
-}
+};

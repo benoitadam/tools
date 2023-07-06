@@ -1,4 +1,3 @@
-
 export type IMsgHandler<T> = (value: T, oldValue: T) => void;
 
 export type IMsgFilter<T> = (value: T) => boolean;
@@ -20,7 +19,7 @@ export interface IMsgSet<T> {
 }
 
 export interface IMsgReadonly<T> extends IMsgGet<T>, IMsgSubscribe<T> {
-  get key(): string|undefined;
+  get key(): string | undefined;
   get val(): T;
   get value(): T;
 

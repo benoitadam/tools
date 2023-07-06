@@ -8,4 +8,4 @@ export default async <T>(createPromise: () => Promise<T>, retry = 2): Promise<T>
     }
   }
   throw error;
-}
+};

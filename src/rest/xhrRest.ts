@@ -21,8 +21,9 @@ export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestO
     if (options.params || options.baseUrl) {
       const urlObj = new URL(url, options.baseUrl);
       if (options.params) {
-        Object.entries(options.params).forEach(kv => {
-          const key = kv[0], val = kv[1];
+        Object.entries(options.params).forEach((kv) => {
+          const key = kv[0],
+            val = kv[1];
           if (Array.isArray(val)) {
             urlObj.searchParams.delete(key);
             Object.values(val).forEach((p) => urlObj.searchParams.append(key, String(p)));
@@ -44,7 +45,7 @@ export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestO
     xhr.setRequestHeader('Accept', acceptMap[xhr.responseType] || acceptJson);
     if (options.headers) {
       const headers = isFunction(options.headers) ? options.headers() : options.headers;
-      Object.entries(headers).forEach(kv => xhr.setRequestHeader(kv[0], kv[1]));
+      Object.entries(headers).forEach((kv) => xhr.setRequestHeader(kv[0], kv[1]));
     }
 
     if (options.onProgress) {
@@ -76,4 +77,4 @@ export default async <T = any>(xhr: XMLHttpRequest, url: RestURL, options: RestO
     if (options.onError) options.onError(error, xhr);
     throw error;
   }
-}
+};

@@ -1,3 +1,3 @@
-import toBoolean from "./toBoolean";
+import toBoolean from './toBoolean';
 
 export default (v: any) => toBoolean(v);

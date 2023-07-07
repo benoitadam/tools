@@ -1,6 +1,6 @@
 {
   "name": "tools",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "private": false,
   "description": "Several small practical and light tools.",
   "license": "MIT",
@@ -24,12 +24,6 @@
   },
   "homepage": "https://m4k.fr/tools",
   "keywords": [
-    "react",
-    "react-component",
-    "mui",
-    "system"
-  ],
-  "tags": [
     "tools",
     "helpers",
     "typescript",
@@ -38,10 +32,21 @@
     "json",
     "message",
     "record",
+    "rest",
     "request",
     "stored",
     "string",
-    "uuid"
+    "uuid",
+    "react",
+    "message",
+    "subscription",
+    "observable"
+  ],
+  "tags": [
+    "react",
+    "node",
+    "browser",
+    "typescript"
   ],
   "devDependencies": {
     "@tsconfig/node12": "^1.0.11",

@@ -1,4 +1,4 @@
-import { deleteKey, groupBy, valueBy } from '../src/record';
+import { deleteKey, groupBy, valueBy } from '../src/index.node';
 
 describe('record', () => {
   const a = { id: 'a', p: 'pa', x: 0 };

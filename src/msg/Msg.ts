@@ -1,5 +1,8 @@
+import { removeItem } from '../array';
 import isFunction from '../check/isFunction';
 import isNotNull from '../check/isNotNull';
+import debounce from '../promise/debounce';
+import throttle from '../promise/throttle';
 import getStored from '../stored/getStored';
 import setStored from '../stored/setStored';
 import { IMsg, IMsgFilter, IMsgHandler, IMsgReadonly, IMsgSet, IMsgSubscription } from './types';
@@ -75,69 +78,38 @@ export default class Msg<T = any> implements IMsg<T> {
     return this.on((val) => target.set(val));
   }
 
-  on(h: IMsgHandler<T>) {
-    this.h.push(h);
+  on(handler: IMsgHandler<T>) {
+    this.h.push(handler);
     if (!this.sO && this.s && this.sH) {
       this.sO = this.s.on(this.sH);
     }
-    return () => this.off(h);
+    return () => this.off(handler);
   }
 
-  off(h: IMsgHandler<T>) {
-    this.h.splice(this.h.indexOf(h), 1);
+  off(handler: IMsgHandler<T>) {
+    removeItem(this.h, handler);
     if (this.sO && this.h.length === 0) {
       this.sO();
       delete this.sO;
     }
   }
 
-  map<U>(cb: (val: T) => U): IMsgReadonly<U> {
-    const r = new Msg<U>(cb(this.v));
-    r.s = this;
-    r.sH = () => r.set(cb(this.v));
-    return r;
+  map<U>(cb: (value: T) => U): IMsgReadonly<U>;
+  map<U>(cb: (value: T) => U, sourceHandler: (target: IMsg<U>) => IMsgHandler<any>): IMsgReadonly<U>;
+  map<U>(cb: (value: T) => U, sourceHandler?: (target: IMsg<U>) => IMsgHandler<any>): IMsgReadonly<U> {
+    const source = this;
+    const target = new Msg<U>(cb(source.v));
+    target.s = source;
+    target.sH = sourceHandler ? sourceHandler(target) : () => target.set(cb(source.v));
+    return target;
   }
 
-  /**
-   * @example
-   * a b c - - - d - - e - -
-   * - - - - c - - - d - - e
-   */
   debounce(ms: number): IMsgReadonly<T> {
-    let timer: any;
-    const r = new Msg<T>(this.v);
-    r.s = this;
-    r.sH = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => r.set(this.v), ms);
-    };
-    return r;
+    return this.map(() => this.v, target => debounce(next => target.set(next), ms));
   }
 
-  /**
-   * @example
-   * a b c d - - - - e - f g - -
-   * a - c - d - - - e - f - g - (2s)
-   * a - - d - - - - e - - g - - (3s)
-   * a - - - d - - - e - - - g - (4s)
-   */
   throttle(ms: number): IMsgReadonly<T> {
-    let timer: any = null;
-    let last = 0;
-    const r = new Msg<T>(this.v);
-    r.s = this;
-    const update = () => {
-      timer = null;
-      last = Date.now();
-      r.set(this.v);
-    };
-    r.sH = () => {
-      if (timer !== null) return;
-      const nextMs = ms - (Date.now() - last);
-      if (nextMs < 0) return update();
-      timer = setTimeout(update, nextMs);
-    };
-    return r;
+    return this.map(() => this.v, target => throttle(next => target.set(next), ms));
   }
 
   toPromise(filter: IMsgFilter<T> = isNotNull) {

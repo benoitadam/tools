@@ -1,5 +1,4 @@
 export type IMsgHandler<T> = (value: T, oldValue: T) => void;
-
 export type IMsgFilter<T> = (value: T) => boolean;
 
 export interface IMsgSubscription {

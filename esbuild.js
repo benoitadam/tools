@@ -11,7 +11,9 @@ function build(outfile, options) {
     bundle: true,
     minify: true,
     sourcemap: true,
-    plugins: [nodeExternalsPlugin()],
+    external: ['react'],
+    // --external:ws
+    // plugins: [nodeExternalsPlugin()],
     ...options,
   })
     .then(() => {
@@ -25,11 +27,7 @@ function build(outfile, options) {
 }
 
 const nodeConfig = {
-  define: {
-    "__NODE_JS__": "true",
-    // "global.crypto": "\"require('crypto')\"",
-    // "global.XMLHttpRequest": "require('xmlhttprequest').XMLHttpRequest"
-  },
+  entryPoints: ['src/index.node.ts'],
   platform: 'node',
   target: ['node12']
 }
@@ -39,9 +37,7 @@ build('lib/node.js', {
 });
 
 build('lib/index.js', {
-  define: {
-    "__NODE_JS__": "false",
-  },
+  entryPoints: ['src/index.browser.ts'],
   target: ['chrome58', 'firefox57', 'safari11', 'edge16']
 });
 

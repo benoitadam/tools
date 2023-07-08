@@ -1,8 +1,4 @@
-if (__NODE_JS__) {
-  global.crypto = require('crypto');
-}
-
-const crypto = global.crypto || {};
+const crypto = globalThis.crypto || {};
 
 export default (() => (
   crypto.randomUUID ? crypto.randomUUID :

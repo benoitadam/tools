@@ -1,4 +1,4 @@
-import { toString, toArray, toRecord, toBoolean, toDate, toError, toNumber } from '../src/cast';
+import { toString, toArray, toRecord, toBoolean, toDate, toError, toNumber } from '../src/index.node';
 
 describe('cast', () => {
   test(`toString`, () => {

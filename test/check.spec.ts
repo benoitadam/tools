@@ -1,4 +1,4 @@
-import { isArray, isDate, isEmpty, isRecord, isFunction, isNil, isString, isUuid } from '../src/check';
+import { isArray, isDate, isEmpty, isRecord, isFunction, isNil, isString, isUuid } from '../src/index.node';
 
 describe('check', () => {
   test(`isArray`, () => {

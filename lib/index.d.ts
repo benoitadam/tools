@@ -274,42 +274,33 @@ declare module "cast/index" {
     export { default as toVoid } from "cast/toVoid";
     export { default as tryCatch } from "cast/tryCatch";
 }
-declare module "stored/storage" {
-    export interface IStorage {
-        getItem(key: string): string | null;
-        removeItem(key: string): void;
-        setItem(key: string, value: string): void;
-    }
-    const _default_35: (storage?: IStorage) => IStorage;
+declare module "stored/setStored" {
+    const _default_35: <T = any>(key: string, value: T) => void;
     export default _default_35;
 }
-declare module "stored/setStored" {
-    const _default_36: <T = any>(key: string, value: T) => void;
-    export default _default_36;
-}
 declare module "clipboard/copy" {
-    const _default_37: (value: any) => Promise<void>;
-    export default _default_37;
+    const _default_36: (value: any) => Promise<void>;
+    export default _default_36;
 }
 declare module "json/parseJson" {
     interface ParseJson {
         <T = any>(v: any): T | undefined;
         <T = any, U = any>(v: any, def: U): T | U;
     }
-    const _default_38: ParseJson;
-    export default _default_38;
+    const _default_37: ParseJson;
+    export default _default_37;
 }
 declare module "stored/getStored" {
     interface GetStored {
         <T = any>(key: string): T | undefined;
         <T = any>(key: string, defVal?: T): T;
     }
-    const _default_39: GetStored;
-    export default _default_39;
+    const _default_38: GetStored;
+    export default _default_38;
 }
 declare module "clipboard/paste" {
-    const _default_40: () => Promise<any>;
-    export default _default_40;
+    const _default_39: () => Promise<any>;
+    export default _default_39;
 }
 declare module "clipboard/index" {
     export { default as copy } from "clipboard/copy";
@@ -320,13 +311,33 @@ declare module "json/cloneJson" {
         <T = any>(v: T): T;
         <T = any>(v: T, defVal: T): T;
     }
-    const _default_41: CloneJson;
-    export default _default_41;
+    const _default_40: CloneJson;
+    export default _default_40;
 }
 declare module "json/index" {
     export { default as cloneJson } from "json/cloneJson";
     export { default as getJson } from "json/getJson";
     export { default as parseJson } from "json/parseJson";
+}
+declare module "promise/debounce" {
+    /**
+     * @example
+     * a b c - - - d - - e - -
+     * - - - - c - - - d - - e
+     */
+    const _default_41: <A = unknown>(fn: (value: A) => unknown, ms: number) => (value: A) => void;
+    export default _default_41;
+}
+declare module "promise/throttle" {
+    /**
+     * @example
+     * a b c d - - - - e - f g - -
+     * a - c - d - - - e - f - g - (2s)
+     * a - - d - - - - e - - g - - (3s)
+     * a - - - d - - - e - - - g - (4s)
+     */
+    const _default_42: <A = unknown>(fn: (value: A) => unknown, ms: number) => (value: A) => void;
+    export default _default_42;
 }
 declare module "msg/types" {
     export type IMsgHandler<T> = (value: T, oldValue: T) => void;
@@ -382,22 +393,11 @@ declare module "msg/Msg" {
         next(value: T | ((value: T) => T)): this;
         subscribe(handler: (next: T) => void): IMsgSubscription;
         pipe(target: IMsgSet<T>): () => void;
-        on(h: IMsgHandler<T>): () => void;
-        off(h: IMsgHandler<T>): void;
-        map<U>(cb: (val: T) => U): IMsgReadonly<U>;
-        /**
-         * @example
-         * a b c - - - d - - e - -
-         * - - - - c - - - d - - e
-         */
+        on(handler: IMsgHandler<T>): () => void;
+        off(handler: IMsgHandler<T>): void;
+        map<U>(cb: (value: T) => U): IMsgReadonly<U>;
+        map<U>(cb: (value: T) => U, sourceHandler: (target: IMsg<U>) => IMsgHandler<any>): IMsgReadonly<U>;
         debounce(ms: number): IMsgReadonly<T>;
-        /**
-         * @example
-         * a b c d - - - - e - f g - -
-         * a - c - d - - - e - f - g - (2s)
-         * a - - d - - - - e - - g - - (3s)
-         * a - - - d - - - e - - - g - (4s)
-         */
         throttle(ms: number): IMsgReadonly<T>;
         toPromise(filter?: IMsgFilter<T>): Promise<T>;
     }
@@ -407,20 +407,20 @@ declare module "msg/index" {
     export * from "msg/types";
 }
 declare module "number/bounds" {
-    const _default_42: (val: number, min?: number, max?: number) => number;
-    export default _default_42;
-}
-declare module "number/diff" {
-    const _default_43: (arg1: number, arg2: number) => number;
+    const _default_43: (val: number, min?: number, max?: number) => number;
     export default _default_43;
 }
-declare module "number/rand" {
-    const _default_44: (min: number, max: number) => number;
+declare module "number/diff" {
+    const _default_44: (arg1: number, arg2: number) => number;
     export default _default_44;
 }
-declare module "number/round" {
-    const _default_45: (value: number, decimal?: number) => number;
+declare module "number/rand" {
+    const _default_45: (min: number, max: number) => number;
     export default _default_45;
+}
+declare module "number/round" {
+    const _default_46: (value: number, decimal?: number) => number;
+    export default _default_46;
 }
 declare module "number/index" {
     export { default as bounds } from "number/bounds";
@@ -429,12 +429,12 @@ declare module "number/index" {
     export { default as round } from "number/round";
 }
 declare module "promise/retry" {
-    const _default_46: <T>(createPromise: () => Promise<T>, retry?: number) => Promise<T>;
-    export default _default_46;
+    const _default_47: <T>(createPromise: () => Promise<T>, retry?: number) => Promise<T>;
+    export default _default_47;
 }
 declare module "promise/sleep" {
-    const _default_47: (ms: number) => Promise<unknown>;
-    export default _default_47;
+    const _default_48: (ms: number) => Promise<unknown>;
+    export default _default_48;
 }
 declare module "promise/TimeoutError" {
     export default class TimeoutError extends Error {
@@ -442,35 +442,20 @@ declare module "promise/TimeoutError" {
     }
 }
 declare module "promise/withTimeout" {
-    const _default_48: <T>(promise: Promise<T>, timeoutMs?: number) => Promise<T>;
-    export default _default_48;
+    const _default_49: <T>(promise: Promise<T>, timeoutMs?: number) => Promise<T>;
+    export default _default_49;
 }
 declare module "promise/index" {
+    export { default as debounce } from "promise/debounce";
     export { default as retry } from "promise/retry";
     export { default as sleep } from "promise/sleep";
+    export { default as throttle } from "promise/throttle";
     export { default as TimeoutError } from "promise/TimeoutError";
     export { default as withTimeout } from "promise/withTimeout";
 }
-declare module "react/useConstant" {
-    const _default_49: (<T>(fn: () => T) => T) | undefined;
-    export default _default_49;
-}
-declare module "react/useMsg" {
-    import Msg from "msg/Msg";
-    interface UseMsg {
-        <T = any>(msg: Msg<T>): T;
-        <T = any>(msg: Msg<T> | null | undefined): T | undefined;
-    }
-    const _default_50: UseMsg | undefined;
-    export default _default_50;
-}
-declare module "react/index" {
-    export { default as useConstant } from "react/useConstant";
-    export { default as useMsg } from "react/useMsg";
-}
 declare module "record/deleteKey" {
-    const _default_51: <T>(record: Record<string, T>, ...keys: string[]) => Record<string, T>;
-    export default _default_51;
+    const _default_50: <T>(record: Record<string, T>, ...keys: string[]) => Record<string, T>;
+    export default _default_50;
 }
 declare module "record/groupBy" {
     type IKey<T> = undefined | null | keyof T | ((item: T, index: number) => any);
@@ -483,12 +468,12 @@ declare module "record/groupBy" {
         <T>(record: Record<string, T>, key: RKey<T>): Record<string, T[]>;
         <T, U>(record: Record<string, T>, key: RKey<T>, val: RVal<T, U>): Record<string, U[]>;
     }
-    const _default_52: GroupBy;
-    export default _default_52;
+    const _default_51: GroupBy;
+    export default _default_51;
 }
 declare module "record/sortKey" {
-    const _default_53: <T extends Record<any, any>>(record: T) => T;
-    export default _default_53;
+    const _default_52: <T extends Record<any, any>>(record: T) => T;
+    export default _default_52;
 }
 declare module "record/index" {
     export { default as deleteKey } from "record/deleteKey";
@@ -533,8 +518,8 @@ declare module "rest/types" {
 }
 declare module "rest/xhrRest" {
     import { RestOptions, RestURL } from "rest/types";
-    const _default_54: <T = any>(xhr: XMLHttpRequest, url: RestURL, options?: RestOptions<T>) => Promise<T>;
-    export default _default_54;
+    const _default_53: <T = any>(xhr: XMLHttpRequest, url: RestURL, options?: RestOptions<T>) => Promise<T>;
+    export default _default_53;
 }
 declare module "rest/Rest" {
     import { RestData, RestOptions, RestURL } from "rest/types";
@@ -563,35 +548,34 @@ declare module "rest/index" {
 declare module "stored/index" {
     export { default as getStored } from "stored/getStored";
     export { default as setStored } from "stored/setStored";
-    export { default as storage } from "stored/storage";
 }
 declare module "string/firstLower" {
+    const _default_54: (arg: string) => string;
+    export default _default_54;
+}
+declare module "string/firstUpper" {
     const _default_55: (arg: string) => string;
     export default _default_55;
 }
-declare module "string/firstUpper" {
+declare module "string/clean" {
     const _default_56: (arg: string) => string;
     export default _default_56;
 }
-declare module "string/clean" {
-    const _default_57: (arg: string) => string;
+declare module "string/words" {
+    const _default_57: (arg: string) => string[];
     export default _default_57;
 }
-declare module "string/words" {
-    const _default_58: (arg: string) => string[];
+declare module "string/pascal" {
+    const _default_58: (arg: any) => string;
     export default _default_58;
 }
-declare module "string/pascal" {
-    const _default_59: (arg: any) => string;
+declare module "string/camel" {
+    const _default_59: (arg: string) => string;
     export default _default_59;
 }
-declare module "string/camel" {
-    const _default_60: (arg: string) => string;
-    export default _default_60;
-}
 declare module "string/uuid" {
-    const _default_61: () => string;
-    export default _default_61;
+    const _default_60: () => string;
+    export default _default_60;
 }
 declare module "string/index" {
     export { default as camel } from "string/camel";
@@ -602,7 +586,24 @@ declare module "string/index" {
     export { default as uuid } from "string/uuid";
     export { default as words } from "string/words";
 }
-declare module "index" {
+declare module "react/useConstant" {
+    const _default_61: <T>(fn: () => T) => T;
+    export default _default_61;
+}
+declare module "react/useMsg" {
+    import Msg from "msg/Msg";
+    interface UseMsg {
+        <T = any>(msg: Msg<T>): T;
+        <T = any>(msg: Msg<T> | null | undefined): T | undefined;
+    }
+    const _default_62: UseMsg;
+    export default _default_62;
+}
+declare module "react/index" {
+    export { default as useConstant } from "react/useConstant";
+    export { default as useMsg } from "react/useMsg";
+}
+declare module "index.browser" {
     export * from "array/index";
     export * from "cast/index";
     export * from "check/index";
@@ -611,12 +612,37 @@ declare module "index" {
     export * from "msg/index";
     export * from "number/index";
     export * from "promise/index";
-    export * from "react/index";
     export * from "record/index";
     export * from "rest/index";
     export * from "stored/index";
     export * from "string/index";
-    export const helloWorld: string;
+    export * from "react/index";
+}
+declare module "stored/NodeLocalStorage" {
+    export default class NodeLocalStorage implements Storage {
+        [key: string]: any;
+        get length(): number;
+        save(): void;
+        clear(): void;
+        getItem(key: string): string | null;
+        key(index: number): string | null;
+        removeItem(key: string): void;
+        setItem(key: string, value: string): void;
+    }
+}
+declare module "index.node" {
+    export * from "array/index";
+    export * from "cast/index";
+    export * from "check/index";
+    export * from "clipboard/index";
+    export * from "json/index";
+    export * from "msg/index";
+    export * from "number/index";
+    export * from "promise/index";
+    export * from "record/index";
+    export * from "rest/index";
+    export * from "stored/index";
+    export * from "string/index";
 }
 declare module "array/first" {
     /**
@@ -625,6 +651,6 @@ declare module "array/first" {
      * @param items
      * @returns
      */
-    const _default_62: <T>(items: T[]) => T;
-    export default _default_62;
+    const _default_63: <T>(items: T[]) => T;
+    export default _default_63;
 }

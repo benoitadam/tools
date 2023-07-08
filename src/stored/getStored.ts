@@ -1,5 +1,4 @@
 import parseJson from '../json/parseJson';
-import storage from './storage';
 
 interface GetStored {
   <T = any>(key: string): T | undefined;
@@ -7,4 +6,4 @@ interface GetStored {
 }
 
 export default (<T = any>(key: string, defVal?: T): T | undefined =>
-  parseJson(storage().getItem(key), defVal)) as GetStored;
+  parseJson(localStorage.getItem(key), defVal)) as GetStored;

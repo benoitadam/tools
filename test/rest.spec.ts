@@ -1,5 +1,4 @@
-import { resolve } from 'path';
-import { Rest, rest } from '../src/rest';
+import { Rest, rest } from '../src/index.node';
 
 describe('request', () => {
     test('constructor', () => {
@@ -8,8 +7,8 @@ describe('request', () => {
     });
 
     test('xhr', () => {
-        expect(!!global.XMLHttpRequest).toBe(true);
-        const xhr1 = new global.XMLHttpRequest();
+        expect(!!XMLHttpRequest).toBe(true);
+        const xhr1 = new XMLHttpRequest();
         const xhr2 = rest.newXhr();
         expect(!!xhr1).toBe(true);
         expect(!!xhr2).toBe(true);

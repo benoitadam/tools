@@ -1,6 +1,4 @@
-import { isUuid } from '../src/check';
-import { firstUpper, firstLower, clean, words, pascal, camel, uuid } from '../src/string';
-import { _uuid } from '../src/string/uuid';
+import { isUuid, firstUpper, firstLower, clean, words, pascal, camel, uuid } from '../src/index.node';
 
 describe('string', () => {
   test(`firstUpper`, () => {
